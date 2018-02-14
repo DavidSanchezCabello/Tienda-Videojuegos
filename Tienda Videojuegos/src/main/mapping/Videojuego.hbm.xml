@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- Cliente.hbm.xml -->
+	<class name="clasesTabla.Videojuego" table="Videojuego">
+		<id name="idVideojuego" type="integer" >
+			<column name="idVideojuego" not-null="true" unique="true"/>
+			<generator class="assigned" />
+		</id>
+		<property name="titulo" type="string">
+			<column name="titulo" length="80" not-null="true"/>
+		</property>
+		<property name="version" type="String">
+			<column name="version" length= "20" not-null = "true"/>
+		</property>
+		<property name="genero" type="String">
+			<column name="genero" length= "45" not-null="true"/>
+		</property>
+		<property name="tipoLicencia" type="String">
+			<column name="tipoLicencia" length= "45"/>
+		</property>
+		<property name="cantidadStock" type="int">
+			<column name="cantidadStock" not-null = "true"/>
+		</property>
+	</class>
+</hibernate-mapping>

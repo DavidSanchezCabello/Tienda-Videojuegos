@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- Cliente.hbm.xml -->
+	<class name="clasesTabla.Venta" table="Venta">
+		<id name="idVenta" type="integer" >
+			<column name="idVenta" not-null="true" unique="true"/>
+			<generator class="assigned" />
+		</id>
+		<property name="licencia" type="string">
+			<column name="licencia" length="45" not-null="true"/>
+		</property>
+		<property name="suscripcion" type="boolean">
+			<column name="suscripcion" not-null = "true"/>
+		</property>
+	</class>
+</hibernate-mapping>

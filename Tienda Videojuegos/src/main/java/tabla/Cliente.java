@@ -6,7 +6,7 @@ public class Cliente implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer idUsuario;
+	private Integer idCliente;
 	private String nombre;
 	private String apellido;
 	private String fechaNacimiento;
@@ -15,8 +15,8 @@ public class Cliente implements Serializable
 	
 	public Cliente() {}
 
-	public Cliente(Integer idUsuario, String nombre, String apellido, String fechaNacimiento, String dni, float saldo) {
-		this.idUsuario = idUsuario;
+	public Cliente(Integer idCliente, String nombre, String apellido, String fechaNacimiento, String dni, float saldo) {
+		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNacimiento = fechaNacimiento;
@@ -34,11 +34,11 @@ public class Cliente implements Serializable
 	}
 
 	public Integer getIdUsuario() {
-		return idUsuario;
+		return idCliente;
 	}
 
 	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+		this.idCliente = idUsuario;
 	}
 
 	public String getNombre() {

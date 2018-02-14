@@ -3,14 +3,16 @@ package main.java.tabla;
 public class Venta
 {
 	private static final long serialVersionUID = 1L;
-	private int venta;
+	private int idVenta;
 	private String licencia;
 	private boolean suscripcion;
 	
+	public Venta() {
+	}
 	
-	public Venta(int venta, String licencia, boolean suscripcion) {
+	public Venta(int idVenta, String licencia, boolean suscripcion) {
 		super();
-		this.venta = venta;
+		this.idVenta = idVenta;
 		this.licencia = licencia;
 		this.suscripcion = suscripcion;
 	}
@@ -24,12 +26,12 @@ public class Venta
 
 
 	public int getVenta() {
-		return venta;
+		return idVenta;
 	}
 
 
 	public void setVenta(int venta) {
-		this.venta = venta;
+		this.idVenta = venta;
 	}
 
 

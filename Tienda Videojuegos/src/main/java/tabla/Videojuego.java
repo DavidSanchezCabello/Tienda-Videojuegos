@@ -10,6 +10,8 @@ public class Videojuego
 	private String tipoLicencia;
 	private int cantidadStock;
 	
+	public Videojuego(){}
+	
 	public Videojuego(int idVideojuego, String titulo, String version, String genero, String tipoLicencia,
 			int cantidadStock) {
 		super();

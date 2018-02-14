@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- Cliente.hbm.xml -->
+	<class name="clasesTabla.Cliente" table="Cliente">
+		<id name="idCliente" type="integer">
+			<column name="idCliente" />
+			<generator class="assigned" />
+		</id>
+		<property name="nombre" type="string">
+			<column name="nombre" length="45" />
+		</property>
+		<property name="apellido" type="string">
+			<column name="apellido" length="45"/>
+		</property>
+		<property name="fechaNacimiento" type="string">
+			<column name="fechaNacimiento"/>
+		</property>
+		<property name="dni" type="string">
+			<column name="dni" length="9" not-null="true"/>
+		</property>
+		<property name="saldo" type="float">
+			<column name="saldo" not-null="true"/>
+		</property>
+	</class>
+</hibernate-mapping>
