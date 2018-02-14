@@ -15,4 +15,5 @@
 			<column name="suscripcion" not-null = "true"/>
 		</property>
 	</class>
+	<!-- zzzzzzzzzz -->
 </hibernate-mapping>

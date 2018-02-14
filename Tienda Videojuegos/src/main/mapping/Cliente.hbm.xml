@@ -23,5 +23,7 @@
 		<property name="saldo" type="float">
 			<column name="saldo" not-null="true"/>
 		</property>
+		
+		<!-- zzzzzzzzzz -->
 	</class>
 </hibernate-mapping>

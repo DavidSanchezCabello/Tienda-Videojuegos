@@ -11,6 +11,7 @@ public class Videojuego
 	private int cantidadStock;
 	
 	public Videojuego(){}
+	//public Videojuego (int idVideojuego){}
 	
 	public Videojuego(int idVideojuego, String titulo, String version, String genero, String tipoLicencia,
 			int cantidadStock) {

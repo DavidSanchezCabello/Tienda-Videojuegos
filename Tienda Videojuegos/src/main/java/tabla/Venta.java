@@ -10,6 +10,8 @@ public class Venta
 	public Venta() {
 	}
 	
+	//asdasdas
+	
 	public Venta(int idVenta, String licencia, boolean suscripcion) {
 		super();
 		this.idVenta = idVenta;
