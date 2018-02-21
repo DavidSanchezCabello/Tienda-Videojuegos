@@ -64,7 +64,27 @@ public class ClienteDAO {
 		session.merge(cli);
 		session.getTransaction().commit();
 	}
-	
+
+	public static void ver(Cliente cli) throws NumberFormatException, IOException {
+		session.beginTransaction();
+		System.out.print("ID: ");
+		idCliente = Integer.parseInt(buf.readLine());
+		cli = buscarPorID(idCliente);
+		System.out.println("Modificamos");
+		System.out.print("Nombre: ");
+		nombre = buf.readLine();
+		System.out.print("Apellidos: ");
+		apellido = buf.readLine();
+		System.out.print("Fecha de Nacimiento: ");
+		fechaNacimiento = buf.readLine();
+		System.out.print("DNI: ");
+		dni = buf.readLine();
+		System.out.print("Saldo: ");
+		saldo = Float.parseFloat(buf.readLine());
+		cli = new Cliente(idCliente, nombre, apellido, fechaNacimiento, dni, saldo);
+
+	}
+
 	public static void borrar(Cliente cli) throws NumberFormatException, IOException {
 		session.beginTransaction();
 		System.out.print("ID: ");
