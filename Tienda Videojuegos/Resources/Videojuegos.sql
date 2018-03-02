@@ -8,10 +8,10 @@ create table Videojuego(idVideojuego integer auto_increment unique not null, tit
 create table Cliente(idCliente integer auto_increment unique not null, nombre varchar(45), apellido
 	varchar(45), fechaNacimiento date, dni varchar(9) not null, saldo float not null, primary key
     (idCliente));
-create table Venta(idVenta integer not null unique auto_increment, idVideojuegoFK integer not null, idUsuarioFK integer not null, fechaAdquirido date
+create table Venta(idVenta integer not null unique auto_increment, idVideojuegoFK integer not null, idClienteFK integer not null, fechaAdquirido date
 	not null, licencia varchar(45) not null, suscripcion boolean not null, primary key(idVenta),
-    foreign key(idVideojuegoFK) references Videojuegos(idVideojuego), foreign key(idUsuarioFK) references
-    Usuarios(idUsuario));
+    foreign key(idVideojuegoFK) references Videojuego(idVideojuego), foreign key(idClienteFK) references
+    Cliente(idCliente));
 -- Realizando los insert
 insert into Videojuego values(1, 'Space Engineers', '0.4', 'Sandbox', 'Early access', 20),(2, 'MrHack', '1.0', 'Puzzle',
 	'Completa', 5),(3, 'Minecraft', '1.12', 'Sandbox', 'Completo', 80),(4, 'Starcraft 2', '3.10' , 'Estrategia', 'Completo', 10),
