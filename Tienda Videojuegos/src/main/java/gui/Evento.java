@@ -43,4 +43,9 @@ public class Evento implements ActionListener {
 		}
 	}
 
+	protected static ActionListener getEventoRegistro() {
+		// TODO Listener de la clase Registro
+		return null;
+	}
+
 }
