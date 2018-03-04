@@ -70,6 +70,7 @@ public class Registro extends JFrame{
 			@Override
 		    public void windowClosing(WindowEvent e) {
 				setVisible(false);
+				dispose();
 		    }
 		});
 		setVisible(true);
