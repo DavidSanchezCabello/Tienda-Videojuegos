@@ -1,6 +1,8 @@
 package main.java.tabla;
 
-public class Videojuego
+import java.io.Serializable;
+
+public class Videojuego implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private int idVideojuego;
@@ -11,7 +13,6 @@ public class Videojuego
 	private int cantidadStock;
 	
 	public Videojuego(){}
-	//public Videojuego (int idVideojuego){}
 	
 	public Videojuego(int idVideojuego, String titulo, String version, String genero, String tipoLicencia,
 			int cantidadStock) {
@@ -80,8 +81,4 @@ public class Videojuego
 	public void setCantidadStock(int cantidadStock) {
 		this.cantidadStock = cantidadStock;
 	}
-	
-	
-	
-	
 }

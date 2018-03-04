@@ -14,7 +14,7 @@ public class Cliente implements Serializable
 	private float saldo;
 	
 	public Cliente() {}
-//asdasdasda
+	
 	public Cliente(Integer idCliente, String nombre, String apellido, String fechaNacimiento, String dni, float saldo) {
 		this.idCliente = idCliente;
 		this.nombre = nombre;

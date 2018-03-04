@@ -1,16 +1,15 @@
 package main.java.tabla;
 
-public class Venta
+import java.io.Serializable;
+
+public class Venta implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private int idVenta;
 	private String licencia;
 	private boolean suscripcion;
 	
-	public Venta() {
-	}
-	
-	//asdasdas
+	public Venta() {}
 	
 	public Venta(int idVenta, String licencia, boolean suscripcion) {
 		super();
