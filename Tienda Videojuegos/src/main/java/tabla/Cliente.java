@@ -33,12 +33,12 @@ public class Cliente implements Serializable
 		this.saldo = saldo;
 	}
 
-	public Integer getIdUsuario() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idCliente = idUsuario;
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getNombre() {

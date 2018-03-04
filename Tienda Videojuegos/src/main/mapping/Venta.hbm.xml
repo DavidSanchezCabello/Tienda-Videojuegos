@@ -8,6 +8,12 @@
 			<column name="idVenta" not-null="true" unique="true"/>
 			<generator class="assigned" />
 		</id>
+		<property name="idVideojuegoFK" type="int">
+			<column name="idVideojuegoFK" not-null = "true"/>
+		</property>
+		<property name="idClienteFK" type="int">
+			<column name="idClienteFK" not-null = "true"/>
+		</property>
 		<property name="licencia" type="string">
 			<column name="licencia" length="45" not-null="true"/>
 		</property>
@@ -15,5 +21,4 @@
 			<column name="suscripcion" not-null = "true"/>
 		</property>
 	</class>
-	<!-- zzzzzzzzzz -->
 </hibernate-mapping>

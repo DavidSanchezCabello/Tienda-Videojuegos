@@ -5,15 +5,17 @@ import java.io.Serializable;
 public class Venta implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private int idVenta;
+	private int idVenta, idVideojuegoFK, idClienteFK;
 	private String licencia;
 	private boolean suscripcion;
 	
 	public Venta() {}
 	
-	public Venta(int idVenta, String licencia, boolean suscripcion) {
+	public Venta(int idVenta, int idVideojuegoFK, int idClienteFK, String licencia, boolean suscripcion) {
 		super();
 		this.idVenta = idVenta;
+		this.idVideojuegoFK = idVideojuegoFK;
+		this.idClienteFK = idClienteFK;
 		this.licencia = licencia;
 		this.suscripcion = suscripcion;
 	}
@@ -26,15 +28,32 @@ public class Venta implements Serializable
 	}
 
 
-	public int getVenta() {
+	public int getIdVenta() {
 		return idVenta;
 	}
 
 
-	public void setVenta(int venta) {
+	public void setIdVenta(int venta) {
 		this.idVenta = venta;
 	}
+	
+	public int getIdVideojuegoFK() {
+		return idVideojuegoFK;
+	}
 
+
+	public void setIdVideojuegoFK(int idVideojuegoFK) {
+		this.idVideojuegoFK = idVideojuegoFK;
+	}
+	
+	public int getIdClienteFK() {
+		return idClienteFK;
+	}
+
+
+	public void setIdClienteFK(int idClienteFK) {
+		this.idClienteFK = idClienteFK;
+	}
 
 	public String getLicencia() {
 		return licencia;

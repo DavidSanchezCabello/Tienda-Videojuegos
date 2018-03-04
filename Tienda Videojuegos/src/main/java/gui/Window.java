@@ -20,10 +20,11 @@ public class Window extends JFrame {
 	JPanel pnVid = new JPanel();
 	JPanel pnCli = new JPanel();
 	JPanel pnVent = new JPanel();
-	static JButton btnNuevo = new JButton("");
-	static JButton btnBorrar = new JButton("");
-	static JButton btnVer = new JButton("");
-	static JButton btnModi = new JButton("");
+	protected JButton btnNuevo = new JButton("");
+	protected JButton btnBorrar = new JButton("");
+	protected JButton btnVer = new JButton("");
+	protected JButton btnModi = new JButton("");
+	protected Object tabla;
 	
 	
 	

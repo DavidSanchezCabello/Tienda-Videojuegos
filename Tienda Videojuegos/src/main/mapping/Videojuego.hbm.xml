@@ -23,6 +23,5 @@
 		<property name="cantidadStock" type="int">
 			<column name="cantidadStock" not-null = "true"/>
 		</property>
-		<!-- asd -->
 	</class>
 </hibernate-mapping>
