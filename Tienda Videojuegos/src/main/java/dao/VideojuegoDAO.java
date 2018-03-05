@@ -9,7 +9,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import main.java.tabla.Cliente;
 import main.java.tabla.Videojuego;
 import main.java.util.HibernateUtil;
 
