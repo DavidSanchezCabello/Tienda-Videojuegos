@@ -97,6 +97,9 @@ public class Registro extends JFrame{
 		}
 		for (int x = 0; x < this.campos.size(); x++) {
 			tabla.setRows(tabla.getRows() + 1);
+			if (x == 0 || (x <= 2 && nombreClase.equals("Venta"))) {
+				this.datos.get(x).setEditable(false);
+			}
 			panelCampos.add(this.campos.get(x));
 			panelCampos.add(this.datos.get(x));
 		}

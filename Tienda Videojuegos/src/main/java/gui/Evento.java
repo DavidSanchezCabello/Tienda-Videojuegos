@@ -123,6 +123,12 @@ public class Evento {
 
 	protected static ActionListener getEventoRegistro() {
 		// TODO Listener de la clase Registro
-		return null;
+		ActionListener evento = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		};
+		return evento;
 	}
 }
