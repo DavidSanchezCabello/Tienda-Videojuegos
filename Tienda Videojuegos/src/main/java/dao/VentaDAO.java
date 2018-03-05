@@ -28,7 +28,7 @@ public class VentaDAO {
 		session.update(ven);
 	}
 	
-	public void borrarByID(Venta ven) throws NumberFormatException, IOException {
+	public void borrar(Venta ven) throws NumberFormatException, IOException {
 		session.delete(ven);
 	}
 	

@@ -27,7 +27,7 @@ public class VideojuegoDAO {
 		session.update(vid);
 	}
 	
-	public void borrarByID(Videojuego vid) throws NumberFormatException, IOException {
+	public void borrar(Videojuego vid) throws NumberFormatException, IOException {
 		session.delete(vid);
 	}
 	

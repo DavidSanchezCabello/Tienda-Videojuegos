@@ -2,6 +2,8 @@ package main.java.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -86,13 +88,20 @@ public class Evento {
 				if (e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
 					new Registro(2, campos, datos, nombreClase);
 				} else if (e.getSource().equals(Main.ventanaPrincipal.btnBorrar)) {
+					List<Venta> registrosFK;
 					if(Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Cliente")) {
 						int eleccion = JOptionPane.showConfirmDialog(null,
 								"Estas a punto de borrar el registro con nombre "
 								+ ((Cliente)Main.ventanaPrincipal.tabla).getNombre()
 								+ ". ¿Deseas continuar?", "¡Borrar cliente!", JOptionPane.YES_NO_OPTION);
 						if(eleccion == 1) {
-							//TODO Intrucciones con clases dao para borrar el registro de la tabla cliente con sus relaciones
+							registrosFK = Main.ventaDao.buscarPorClienteFK((Cliente)Main.ventanaPrincipal.tabla);
+							borrado(registrosFK);
+							try {
+								Main.clienteDao.borrar((Cliente)Main.ventanaPrincipal.tabla);
+							} catch (NumberFormatException | IOException e1) {
+								e1.printStackTrace();
+							}
 						}
 					} else if (Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Videojuego")) {
 						int eleccion = JOptionPane.showConfirmDialog(null,
@@ -100,7 +109,13 @@ public class Evento {
 								+ ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo()
 								+ ". ¿Deseas continuar?", "¡Borrar videojuego!", JOptionPane.YES_NO_OPTION);
 						if(eleccion == 1) {
-							//TODO Intrucciones con clases dao para borrar el registro de la tabla videojuegos con sus relaciones
+							registrosFK = Main.ventaDao.buscarPorVideojuegoFK((Videojuego)Main.ventanaPrincipal.tabla);
+							borrado(registrosFK);
+							try {
+								Main.videojuegoDao.borrar((Videojuego)Main.ventanaPrincipal.tabla);
+							} catch (NumberFormatException | IOException e1) {
+								e1.printStackTrace();
+							}
 						}
 					} else {
 						int eleccion = JOptionPane.showConfirmDialog(null,
@@ -108,7 +123,11 @@ public class Evento {
 								+ ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo()
 								+ ". ¿Deseas continuar?", "¡Borrar venta!", JOptionPane.YES_NO_OPTION);
 						if(eleccion == 1) {
-							//TODO Intrucciones con clases dao para borrar el registro de la tabla venta
+							try {
+								Main.ventaDao.borrar((Venta)Main.ventanaPrincipal.tabla);
+							} catch (NumberFormatException | IOException e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 				} else if (e.getSource().equals(Main.ventanaPrincipal.btnModi)) {
@@ -130,5 +149,15 @@ public class Evento {
 			}
 		};
 		return evento;
+	}
+	
+	private static void borrado(List<Venta> registrosFK) {
+		for (int x = 0; x < registrosFK.size(); x++) {
+			try {
+				Main.ventaDao.borrar((registrosFK.get(x)));
+			} catch (NumberFormatException | IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

@@ -27,7 +27,7 @@ public class ClienteDAO {
 		session.update(cli);
 	}
 
-	public void borrarByID(Cliente cli) throws NumberFormatException, IOException {
+	public void borrar(Cliente cli) throws NumberFormatException, IOException {
 		session.delete(cli);
 	}
 
