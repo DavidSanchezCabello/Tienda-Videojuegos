@@ -21,8 +21,10 @@ public class Venta implements Serializable
 	}
 
 
-	public Venta(String licencia, boolean suscripcion) {
+	public Venta(int idVideojuegoFK, int idClienteFK, String licencia, boolean suscripcion) {
 		super();
+		this.idVideojuegoFK = idVideojuegoFK;
+		this.idClienteFK = idClienteFK;
 		this.licencia = licencia;
 		this.suscripcion = suscripcion;
 	}

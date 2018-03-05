@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +14,13 @@ import main.java.tabla.Venta;
 import main.java.tabla.Videojuego;
 
 public class Evento {
-
+	
+	private static final String FECHA = "\\d{4}-\\d{2}-\\d{2}";
+	private static final String DNI = "\\d{8}[A-Z]";
+	private static final String FLOAT = "\\d+\\.\\d+";
+	private static final String INT = "\\d+";
+	private static Registro registro;
+	
 	protected static ActionListener getEventoWindow() {
 		ActionListener evento = new ActionListener() {
 			@Override
@@ -86,7 +93,7 @@ public class Evento {
 					}	
 				}
 				if (e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
-					new Registro(2, campos, datos, nombreClase);
+					registro = new Registro(2, campos, datos, nombreClase);
 				} else if (e.getSource().equals(Main.ventanaPrincipal.btnBorrar)) {
 					List<Venta> registrosFK;
 					if(Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Cliente")) {
@@ -131,9 +138,9 @@ public class Evento {
 						}
 					}
 				} else if (e.getSource().equals(Main.ventanaPrincipal.btnModi)) {
-					new Registro(3, campos, datos, nombreClase);
+					registro = new Registro(3, campos, datos, nombreClase);
 				} else if (e.getSource().equals(Main.ventanaPrincipal.btnVer)) {
-					new Registro(1, campos, datos, nombreClase);
+					registro = new Registro(1, campos, datos, nombreClase);
 				}
 			}
 		};
@@ -145,7 +152,117 @@ public class Evento {
 		ActionListener evento = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if (e.getSource().equals(registro.btnConfirmar)) {
+					if (registro.nombreClase.equals("Cliente")) {
+						if (registro.datos.get(1).getText().length() <= 45) {
+							if (registro.datos.get(2).getText().length() <= 45) {
+								if (Pattern.matches(Evento.FECHA, registro.datos.get(3).getText())) {
+									if (Pattern.matches(Evento.DNI, registro.datos.get(4).getText())) {
+										if (Pattern.matches(Evento.FLOAT, registro.datos.get(5).getText())) {
+											if (registro.btnConfirmar.getText().equals("Guardar")) {
+												Main.clienteDao.guardar(new Cliente(registro.datos.get(1).getText(),
+														registro.datos.get(2).getText(),
+														registro.datos.get(3).getText(),
+														registro.datos.get(4).getText(),
+														Float.parseFloat(registro.datos.get(5).getText())));
+											} else {
+												Main.clienteDao.modificar(new Cliente(Integer.parseInt(registro.datos.get(0).getText()),
+														registro.datos.get(1).getText(),
+														registro.datos.get(2).getText(),
+														registro.datos.get(3).getText(),
+														registro.datos.get(4).getText(),
+														Float.parseFloat(registro.datos.get(5).getText())));
+											}
+										} else {
+											dialogoError("El saldo no es correcto. Por favor introduzcalo como número decimal con \".\"");
+										}
+									} else {
+										dialogoError("El DNI es incorrecto. Introduzca los 8 números y su letra.");
+									}
+								} else {
+									dialogoError("La fecha no es correcta. Introduzca una fecha con el formato aaaa-mm-dd.");
+								}
+							} else {
+								dialogoError("El apellido no puede tener más de 45 carácteres.");
+							}
+						} else {
+							dialogoError("El nombre no puede tener más de 45 carácteres.");
+						}
+					} else if (registro.nombreClase.equals("Videojuego")) {
+						if (registro.datos.get(1).getText().length() <= 80) {
+							if (registro.datos.get(2).getText().length() <= 20) {
+								if (registro.datos.get(3).getText().length() <= 45) {
+									if (registro.datos.get(4).getText().length() <= 45) {
+										if (Pattern.matches(Evento.INT, registro.datos.get(5).getText())) {
+											if (registro.btnConfirmar.getText().equals("Guardar")) {
+												Main.videojuegoDao.guardar(new Videojuego(registro.datos.get(1).getText(),
+														registro.datos.get(2).getText(),
+														registro.datos.get(3).getText(),
+														registro.datos.get(4).getText(),
+														Integer.parseInt(registro.datos.get(5).getText())));
+											} else {
+												Main.videojuegoDao.modificar(new Videojuego(Integer.parseInt(registro.datos.get(0).getText()),
+														registro.datos.get(1).getText(),
+														registro.datos.get(2).getText(),
+														registro.datos.get(3).getText(),
+														registro.datos.get(4).getText(),
+														Integer.parseInt(registro.datos.get(5).getText())));
+											}
+										} else {
+											dialogoError("La cantidad de stock no es correcto. Por favor introduzcalo con un número");
+										}
+									} else {
+										dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
+									}
+								} else {
+									dialogoError("El género no puede tener más de 45 carácteres.");
+								}
+							} else {
+								dialogoError("La versión no puede tener más de 20 carácteres.");
+							}
+						} else {
+							dialogoError("El titulo no puede tener más de 80 carácteres.");
+						}
+					} else {
+						//TODO Listener boton confimar cuando estar cargado la tabla venta
+						/*if (Pattern.matches(Evento.INT, registro.datos.get(1).getText())) {
+							if (Pattern.matches(Evento.INT, registro.datos.get(2).getText())) {
+								if (registro.datos.get(3).getText().length() <= 45) {
+									if (registro.datos.get(4).getText().equals("Verdadero") ||
+											registro.datos.get(4).getText().equals("Falso")) {
+										boolean suscripcion = false;
+										if(registro.datos.get(4).getText().equals("Verdadero")) {
+											suscripcion = true;
+										}
+										if (registro.btnConfirmar.getText().equals("Guardar")) {
+											Main.ventaDao.guardar(new Venta(Integer.parseInt(registro.datos.get(1).getText()),
+													Integer.parseInt(registro.datos.get(2).getText()),
+													registro.datos.get(3).getText(),
+													suscripcion));
+										} else {
+											Main.ventaDao.modificar(new Venta(Integer.parseInt(registro.datos.get(0).getText()),
+													Integer.parseInt(registro.datos.get(1).getText()),
+													Integer.parseInt(registro.datos.get(2).getText()),
+													registro.datos.get(3).getText(),
+													suscripcion));
+										}
+									} else {
+										dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
+									}
+								} else {
+									dialogoError("El género no puede tener más de 45 carácteres.");
+								}
+							} else {
+								dialogoError("La versión no puede tener más de 20 carácteres.");
+							}
+						} else {
+							dialogoError("El titulo no puede tener más de 80 carácteres.");
+						}*/
+					}
+				} else {
+					registro.setVisible(false);
+					registro.dispose();
+				}
 			}
 		};
 		return evento;
@@ -159,5 +276,8 @@ public class Evento {
 				e.printStackTrace();
 			}
 		}
+	}
+	private static void dialogoError(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "¡Modificación no aceptada!", JOptionPane.ERROR_MESSAGE);
 	}
 }

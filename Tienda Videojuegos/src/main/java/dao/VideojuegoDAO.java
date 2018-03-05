@@ -18,7 +18,6 @@ public class VideojuegoDAO {
 	}
 	
 	public Videojuego buscarPorID(Integer id) {
-		// aquí busco el id
 		Videojuego vid = session.get(Videojuego.class, id);
 		return vid;
 	}

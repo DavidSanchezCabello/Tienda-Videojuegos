@@ -16,8 +16,8 @@ public class Registro extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<JLabel> campos;
-	private ArrayList<JTextField> datos;
-	protected JButton confirmar, cancelar;
+	protected ArrayList<JTextField> datos;
+	protected JButton btnConfirmar, btnCancelar;
 	protected String nombreClase;
 	
 	public Registro(int tipoAccion, String[] campos, String[] datos, String nombreClase) {
@@ -25,36 +25,36 @@ public class Registro extends JFrame{
 		switch (tipoAccion) {
 			case 1: {
 				Container contenedor = añadirCampos(campos, datos, true);
-				confirmar = new JButton("Aceptar");
-				confirmar.setBounds(75, 165, 85, 25);
-				contenedor.add(confirmar);
-				confirmar.addActionListener(Evento.getEventoRegistro());
+				btnCancelar = new JButton("Aceptar");
+				btnCancelar.setBounds(75, 165, 85, 25);
+				contenedor.add(btnCancelar);
+				btnCancelar.addActionListener(Evento.getEventoRegistro());
 				setContentPane(contenedor);
 				setTitle("Consulta");
 				break;
 			}
 			case 2: {
 				Container contenedor = añadirCampos(campos, datos, false);
-				confirmar = new JButton("Guardar");
-				confirmar.setBounds(30, 165, 85, 25);
-				cancelar = new JButton("Cancelar");
-				cancelar.setBounds(125, 165, 85, 25);
-				contenedor.add(confirmar);
-				contenedor.add(cancelar);
-				confirmar.addActionListener(Evento.getEventoRegistro());
+				btnConfirmar = new JButton("Guardar");
+				btnConfirmar.setBounds(30, 165, 85, 25);
+				btnCancelar = new JButton("Cancelar");
+				btnCancelar.setBounds(125, 165, 85, 25);
+				contenedor.add(btnConfirmar);
+				contenedor.add(btnCancelar);
+				btnConfirmar.addActionListener(Evento.getEventoRegistro());
 				setContentPane(contenedor);
 				setTitle("Nuevo");
 				break;
 			}
 			case 3: {
 				Container contenedor = añadirCampos(campos, datos, true);
-				confirmar = new JButton("Actualizar");
-				confirmar.setBounds(25, 165, 95, 25);
-				cancelar = new JButton("Cancelar");
-				cancelar.setBounds(135, 165, 85, 25);
-				contenedor.add(confirmar);
-				contenedor.add(cancelar);
-				confirmar.addActionListener(Evento.getEventoRegistro());
+				btnConfirmar = new JButton("Actualizar");
+				btnConfirmar.setBounds(25, 165, 95, 25);
+				btnCancelar = new JButton("Cancelar");
+				btnCancelar.setBounds(135, 165, 85, 25);
+				contenedor.add(btnConfirmar);
+				contenedor.add(btnCancelar);
+				btnConfirmar.addActionListener(Evento.getEventoRegistro());
 				setContentPane(contenedor);
 				setTitle("Modificar");
 				break;
