@@ -80,13 +80,4 @@ public class ClienteDAO {
 		cli = consulta.uniqueResult();
 		return cli;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Cliente> buscarDel1Al5() {
-		List<Cliente> listaCliente = new ArrayList<Cliente>();
-		Query<Cliente> consulta = session.createQuery("from Cliente s where idCliente >= 1 and idCliente<=5");
-		listaCliente = consulta.list();
-		return listaCliente;
-	}
-
 }
