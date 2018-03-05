@@ -134,14 +134,14 @@ public class Window extends JFrame {
 		
 		//Tabla Videojuegos
 		List<Videojuego> buscVideojuego = Main.videojuegoDao.buscarTodos();
-		DefaultTableModel modActor = (DefaultTableModel) Window.tablaVideojuego.getModel();
+		DefaultTableModel modVideojuego = (DefaultTableModel) Window.tablaVideojuego.getModel();
 		int contador = Window.tablaVideojuego.getRowCount();
 		for (int i = 0; contador > i; i++) {
-			modActor.removeRow(0);
+			modVideojuego.removeRow(0);
 		}
-		for (Videojuego act : buscVideojuego) {
-			arrIdVideojuego.add(act.getIdVideojuego());
-			modActor.addRow(new Object[] { act.getTitulo(), act.getGenero(), act.getCantidadStock() });
+		for (Videojuego vid : buscVideojuego) {
+			arrIdVideojuego.add(vid.getIdVideojuego());
+			modVideojuego.addRow(new Object[] { vid.getTitulo(), vid.getGenero(), vid.getCantidadStock() });
 		}
 		
 		// Tabla Cliente
@@ -150,9 +150,9 @@ public class Window extends JFrame {
 				int contador2 = Window.tablaCliente.getRowCount();
 				for (int i = 0; contador2 > i; i++)
 					modCliente.removeRow(0);
-				for (Cliente pel : buscCliente) {
-					arrIdCliente.add(pel.getIdCliente());
-					modCliente.addRow(new Object[] { pel.getNombre(), pel.getDni(), pel.getSaldo() });
+				for (Cliente cli : buscCliente) {
+					arrIdCliente.add(cli.getIdCliente());
+					modCliente.addRow(new Object[] { cli.getNombre(), cli.getDni(), cli.getSaldo() });
 				}
 				// Tabla Venta
 				List<Venta> buscVenta = Main.ventaDao.buscarTodos();
@@ -160,10 +160,10 @@ public class Window extends JFrame {
 				int contador3 = Window.tablaVenta.getRowCount();
 				for (int i = 0; contador3 > i; i++)
 					modVenta.removeRow(0);
-				for (Venta rep : buscVenta) {
-					arrIdVenta.add(rep.getIdVenta());
+				for (Venta vent : buscVenta) {
+					arrIdVenta.add(vent.getIdVenta());
 					//modVenta
-					//		.addRow(new Object[] { rep.getIdVideojuegoFK().getTitulo(), rep.getCliente().getTitulo(), rep.getPapel() });
+					//		.addRow(new Object[] { vent.getIdVideojuegoFK().getTitulo(), vent.getCliente().getTitulo(), vent.getPapel() });
 
 				}
 		
