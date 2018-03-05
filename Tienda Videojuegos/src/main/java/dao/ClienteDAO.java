@@ -11,23 +11,23 @@ import main.java.tabla.Cliente;
 import main.java.util.HibernateUtil;
 
 public class ClienteDAO {
-	public static Session session = HibernateUtil.getSession();
+	private Session session = HibernateUtil.getSession();
 
 
-	public static void guardar(Cliente cli) {
+	public void guardar(Cliente cli) {
 		session.save(cli);
 	}
 
-	public static Cliente buscarPorID(Integer id) {
+	public Cliente buscarPorID(Integer id) {
 		Cliente cli = session.get(Cliente.class, id);
 		return cli;
 	}
 
-	public static void modificar(Cliente cli) {
+	public void modificar(Cliente cli) {
 		session.update(cli);
 	}
 
-	public static void borrarByID(Cliente cli) throws NumberFormatException, IOException {
+	public void borrarByID(Cliente cli) throws NumberFormatException, IOException {
 		session.delete(cli);
 	}
 

@@ -13,22 +13,22 @@ import main.java.tabla.Videojuego;
 import main.java.util.HibernateUtil;
 
 public class VentaDAO {
-	public static Session session = HibernateUtil.getSession();
+	private Session session = HibernateUtil.getSession();
 	
-	public static void guardar(Venta ven) {
+	public void guardar(Venta ven) {
 		session.save(ven);
 	}
 	
-	public static Venta buscarPorID(Integer id) {
+	public Venta buscarPorID(Integer id) {
 		Venta ven = session.get(Venta.class, id);
 		return ven;
 	}
 	
-	public static void modificar(Venta ven) {
+	public void modificar(Venta ven) {
 		session.update(ven);
 	}
 	
-	public static void borrarByID(Venta ven) throws NumberFormatException, IOException {
+	public void borrarByID(Venta ven) throws NumberFormatException, IOException {
 		session.delete(ven);
 	}
 	

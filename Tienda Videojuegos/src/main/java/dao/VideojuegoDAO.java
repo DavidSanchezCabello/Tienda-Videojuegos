@@ -11,24 +11,24 @@ import main.java.tabla.Videojuego;
 import main.java.util.HibernateUtil;
 
 public class VideojuegoDAO {
-	public static Session session = HibernateUtil.getSession();
+	private Session session = HibernateUtil.getSession();
 	
-	public static void guardar(Videojuego vid) {
+	public void guardar(Videojuego vid) {
 		session.save(vid);
 	}
 	
-	public static Videojuego buscarPorID(Integer id) {
+	public Videojuego buscarPorID(Integer id) {
 		// aquí busco el id
 		Videojuego vid = session.get(Videojuego.class, id);
 		return vid;
 	}
 	
-	public static void modificar(Videojuego vid) {
+	public void modificar(Videojuego vid) {
 		session.update(vid);
 	}
 	
-	public static void borrarByID(Videojuego vid) throws NumberFormatException, IOException {
-		session.delete(vid); // esto es un delete
+	public void borrarByID(Videojuego vid) throws NumberFormatException, IOException {
+		session.delete(vid);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -40,8 +40,6 @@ public class VideojuegoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	// unique result(); esta consulta solo me debe dar una consulta, si da mas no
-	// vale este método, seria list();
 	public Videojuego buscarPorTitulo(String titulo) {
 		Videojuego vid;
 		Query<Videojuego> consulta = session.createQuery("from Videojuego where titulo='" + titulo + "'");
