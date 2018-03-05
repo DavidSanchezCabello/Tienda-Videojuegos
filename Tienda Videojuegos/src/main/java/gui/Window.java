@@ -1,6 +1,9 @@
 package main.java.gui;
 
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import main.java.Main;
-import main.java.dao.VentaDAO;
 import main.java.tabla.Cliente;
 import main.java.tabla.Venta;
 import main.java.tabla.Videojuego;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements ActionListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 
 	JTabbedPane pestañas = new JTabbedPane();
@@ -115,6 +115,19 @@ public class Window extends JFrame {
 		pnCli.add(tablaCliente);
 		pnVent.add(tablaVenta);
 	
+		
+		btnNuevo.addActionListener(this);
+		btnBorrar.addActionListener(this);
+		btnVer.addActionListener(this);
+		btnModi.addActionListener(this);
+		
+		tablaVideojuego.addMouseListener(this);
+		tablaCliente.addMouseListener(this);
+		tablaVenta.addMouseListener(this);
+		
+		
+		
+		setIconImage(new ImageIcon("Icon.png").getImage());
 		//add(scroll, BorderLayout.CENTER);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(450, 300);
@@ -162,9 +175,9 @@ public class Window extends JFrame {
 					modVenta.removeRow(0);
 				for (Venta vent : buscVenta) {
 					arrIdVenta.add(vent.getIdVenta());
-					//modVenta
+						//modVenta
 					//		.addRow(new Object[] { vent.getIdVideojuegoFK().getTitulo(), vent.getCliente().getTitulo(), vent.getPapel() });
-
+						//	.addRow(new Object[] { vent. });
 				}
 		
 		
@@ -173,6 +186,42 @@ public class Window extends JFrame {
 		
 		
 		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 	
