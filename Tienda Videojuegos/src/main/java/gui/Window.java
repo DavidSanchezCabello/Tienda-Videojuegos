@@ -116,10 +116,10 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 		pnVent.add(tablaVenta);
 	
 		
-		btnNuevo.addActionListener(this);
-		btnBorrar.addActionListener(this);
-		btnVer.addActionListener(this);
-		btnModi.addActionListener(this);
+		btnNuevo.addActionListener(Evento.getEventoWindow());
+		btnBorrar.addActionListener(Evento.getEventoWindow());
+		btnVer.addActionListener(Evento.getEventoWindow());
+		btnModi.addActionListener(Evento.getEventoWindow());
 		
 		tablaVideojuego.addMouseListener(this);
 		tablaCliente.addMouseListener(this);
