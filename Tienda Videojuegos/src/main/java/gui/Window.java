@@ -1,5 +1,6 @@
 package main.java.gui;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -51,7 +52,7 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 	static ArrayList arrIdVenta = new ArrayList();
 	
 	public static JTable tablaVideojuego = new JTable();
-	static JScrollPane scrollVidejuego = new JScrollPane(tablaVideojuego);
+	static JScrollPane scrollVideojuego = new JScrollPane(tablaVideojuego);
 
 	public static JTable tablaCliente = new JTable();
 	JScrollPane scrollCliente = new JScrollPane(tablaCliente);
@@ -63,6 +64,7 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 		setLayout(null);
 		setTitle("Menú");
 		
+		
 		//add(scroll);
 		//pack();
 		pestañas.setBounds(60, 0, 500, 500);
@@ -71,7 +73,7 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 		pestañas.addTab("Ventas", pnVent);
 		add(pestañas);
 		
-		
+		//Para no editarlo con doble clic
 		tablaVideojuego.setDefaultEditor(Object.class, null);
 		tablaCliente.setDefaultEditor(Object.class, null);
 		tablaVenta.setDefaultEditor(Object.class, null);
@@ -104,6 +106,19 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 		btnModi.setBounds(5, 200, 50, 50);
 		ImageIcon img4 = new ImageIcon("modi.png");
 		btnModi.setIcon(img4);
+		
+		
+		pnVid.setLayout(null);
+		pnCli.setLayout(null);
+		pnVent.setLayout(null);
+		
+		tablaVideojuego.setBounds(3, 15, 300, 200);
+		tablaCliente.setBounds(3, 15, 300, 200);
+		tablaVenta.setBounds(3, 15, 300, 200);
+	//	pnVid.setBounds(5, 10, 20, 20);
+//		scrollVideojuego.setPreferredSize(new Dimension(400, 100));
+//		scrollCliente.setPreferredSize(new Dimension(400, 100));
+//		scrollVenta.setPreferredSize(new Dimension(400, 100));
 		
 		add(btnNuevo);
 		add(btnBorrar);
