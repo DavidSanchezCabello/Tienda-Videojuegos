@@ -66,7 +66,7 @@ public class ClienteDAO {
 	@SuppressWarnings("unchecked")
 	public List<Cliente> buscarTodos() {
 		List<Cliente> cliente = new ArrayList<Cliente>();
-		Query<Cliente> consulta = session.createQuery("from Cliente cli");
+		Query<Cliente> consulta = session.createQuery("from Cliente");
 		cliente = consulta.list();
 		return cliente;
 	}

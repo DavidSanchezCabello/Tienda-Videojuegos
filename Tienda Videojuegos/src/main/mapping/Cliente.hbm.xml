@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<!-- Cliente.hbm.xml -->
-	<class name="clasesTabla.Cliente" table="Cliente">
+	<class name="main.java.tabla.Cliente" table="Cliente">
 		<id name="idCliente" type="integer">
 			<column name="idCliente" />
 			<generator class="assigned" />

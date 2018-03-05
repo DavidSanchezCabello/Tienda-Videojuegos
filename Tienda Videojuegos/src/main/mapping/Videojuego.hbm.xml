@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<!-- Cliente.hbm.xml -->
-	<class name="clasesTabla.Videojuego" table="Videojuego">
+	<class name="main.java.tabla.Videojuego" table="Videojuego">
 		<id name="idVideojuego" type="integer" >
 			<column name="idVideojuego" not-null="true" unique="true"/>
 			<generator class="assigned" />
@@ -11,13 +11,13 @@
 		<property name="titulo" type="string">
 			<column name="titulo" length="80" not-null="true"/>
 		</property>
-		<property name="version" type="String">
+		<property name="version" type="string">
 			<column name="version" length= "20" not-null = "true"/>
 		</property>
-		<property name="genero" type="String">
+		<property name="genero" type="string">
 			<column name="genero" length= "45" not-null="true"/>
 		</property>
-		<property name="tipoLicencia" type="String">
+		<property name="tipoLicencia" type="string">
 			<column name="tipoLicencia" length= "45"/>
 		</property>
 		<property name="cantidadStock" type="int">
