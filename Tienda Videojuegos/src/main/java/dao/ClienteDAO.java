@@ -1,8 +1,6 @@
 package main.java.dao;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,53 +12,23 @@ import main.java.util.HibernateUtil;
 
 public class ClienteDAO {
 	public static Session session = HibernateUtil.getSession();
-	static BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
-	static int idCliente;
-	static String nombre;
-	static String apellido;
-	static String fechaNacimiento;
-	static String dni;
-	static Float saldo;
+
 
 	public static void guardar(Cliente cli) {
 		session.save(cli);
 	}
 
 	public static Cliente buscarPorID(Integer id) {
-		// aquí busco el id
 		Cliente cli = session.get(Cliente.class, id);
 		return cli;
 	}
 
 	public static void modificar(Cliente cli) {
-		cli = buscarPorID(idCliente);
-		cli = new Cliente(idCliente, nombre, apellido, fechaNacimiento, dni, saldo);
 		session.update(cli);
 	}
 
-//	public static void ver(Cliente cli) throws NumberFormatException, IOException {
-//		session.beginTransaction();
-//		System.out.print("ID: ");
-//		idCliente = Integer.parseInt(buf.readLine());
-//		cli = buscarPorID(idCliente);
-//		System.out.println("Modificamos");
-//		System.out.print("Nombre: ");
-//		nombre = buf.readLine();
-//		System.out.print("Apellidos: ");
-//		apellido = buf.readLine();
-//		System.out.print("Fecha de Nacimiento: ");
-//		fechaNacimiento = buf.readLine();
-//		System.out.print("DNI: ");
-//		dni = buf.readLine();
-//		System.out.print("Saldo: ");
-//		saldo = Float.parseFloat(buf.readLine());
-//		cli = new Cliente(idCliente, nombre, apellido, fechaNacimiento, dni, saldo);
-//
-//	}
-
 	public static void borrarByID(Cliente cli) throws NumberFormatException, IOException {
-		cli = buscarPorID(idCliente);
-		session.delete(cli); // esto es un delete
+		session.delete(cli);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -72,8 +40,6 @@ public class ClienteDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	// unique result(); esta consulta solo me debe dar una consulta, si da mas no
-	// vale este método, seria list();
 	public Cliente buscarPorNombre(String nombre) {
 		Cliente cli;
 		Query<Cliente> consulta = session.createQuery("from Cliente where nombreCliente='" + nombre + "'");
