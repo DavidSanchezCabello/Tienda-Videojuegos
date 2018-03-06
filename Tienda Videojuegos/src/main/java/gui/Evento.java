@@ -2,6 +2,8 @@ package main.java.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -20,6 +22,66 @@ public class Evento {
 	private static final String FLOAT = "\\d+\\.\\d+";
 	private static final String INT = "\\d+";
 	private static Registro registro;
+	
+	protected static MouseListener getEventoWindowMouse() {
+		MouseListener evento = new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if(e.getSource().equals(Main.ventanaPrincipal.pestañas)) {
+					if(Main.ventanaPrincipal.pestañas.getSelectedIndex() == 0) {
+						Main.ventanaPrincipal.tablaCliente.clearSelection();
+						Main.ventanaPrincipal.tablaVenta.clearSelection();
+					} else if(Main.ventanaPrincipal.pestañas.getSelectedIndex() == 1) {
+						Main.ventanaPrincipal.tablaVideojuego.clearSelection();
+						Main.ventanaPrincipal.tablaVenta.clearSelection();
+					} else {
+						Main.ventanaPrincipal.tablaCliente.clearSelection();
+						Main.ventanaPrincipal.tablaCliente.clearSelection();
+					}
+					Main.ventanaPrincipal.tabla = null;
+				} else if (e.getSource().equals(Main.ventanaPrincipal.tablaVideojuego)) {
+					if (Main.ventanaPrincipal.tablaVideojuego.getSelectedRow() != -1) {
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVideojuego.get(Main.ventanaPrincipal.tablaVideojuego.getSelectedRow());
+					}
+				} else if (e.getSource().equals(Main.ventanaPrincipal.tablaCliente)) {
+					if (Main.ventanaPrincipal.tablaCliente.getSelectedRow() != -1) {
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdCliente.get(Main.ventanaPrincipal.tablaCliente.getSelectedRow());
+					}
+				} else {
+					if (Main.ventanaPrincipal.tablaVenta.getSelectedRow() != -1) {
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVenta.get(Main.ventanaPrincipal.tablaVenta.getSelectedRow());
+					}
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		
+		return evento;
+	}
 	
 	protected static ActionListener getEventoWindow() {
 		ActionListener evento = new ActionListener() {
@@ -104,6 +166,7 @@ public class Evento {
 						if(eleccion == 1) {
 							registrosFK = Main.ventaDao.buscarPorClienteFK((Cliente)Main.ventanaPrincipal.tabla);
 							borrado(registrosFK);
+							
 							try {
 								Main.clienteDao.borrar((Cliente)Main.ventanaPrincipal.tabla);
 							} catch (NumberFormatException | IOException e1) {

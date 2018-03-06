@@ -1,6 +1,5 @@
 package main.java.gui;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -47,9 +46,9 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 //    JScrollPane scrollpane = new JScrollPane(table);
 	
 	
-	static ArrayList arrIdVideojuego = new ArrayList();
-	static ArrayList arrIdCliente = new ArrayList();
-	static ArrayList arrIdVenta = new ArrayList();
+	static ArrayList<Videojuego> arrIdVideojuego = new ArrayList<Videojuego>();
+	static ArrayList<Cliente> arrIdCliente = new ArrayList<Cliente>();
+	static ArrayList<Venta> arrIdVenta = new ArrayList<Venta>();
 	
 	public static JTable tablaVideojuego = new JTable();
 	static JScrollPane scrollVideojuego = new JScrollPane(tablaVideojuego);
@@ -136,9 +135,10 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 		btnVer.addActionListener(Evento.getEventoWindow());
 		btnModi.addActionListener(Evento.getEventoWindow());
 		
-		tablaVideojuego.addMouseListener(this);
-		tablaCliente.addMouseListener(this);
-		tablaVenta.addMouseListener(this);
+		pestañas.addMouseListener(Evento.getEventoWindowMouse());
+		tablaVideojuego.addMouseListener(Evento.getEventoWindowMouse());
+		tablaCliente.addMouseListener(Evento.getEventoWindowMouse());
+		tablaVenta.addMouseListener(Evento.getEventoWindowMouse());
 		
 		
 		
@@ -153,7 +153,7 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 		generarTablas();
 	}
 
-	public static void generarTablas(){
+	public void generarTablas(){
 		
 		
 		arrIdVideojuego.clear();
@@ -161,35 +161,32 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 		arrIdVenta.clear();
 		
 		//Tabla Videojuegos
-		List<Videojuego> buscVideojuego = Main.videojuegoDao.buscarTodos();
+		arrIdVideojuego = (ArrayList<Videojuego>) Main.videojuegoDao.buscarTodos();
 		DefaultTableModel modVideojuego = (DefaultTableModel) Window.tablaVideojuego.getModel();
 		int contador = Window.tablaVideojuego.getRowCount();
 		for (int i = 0; contador > i; i++) {
 			modVideojuego.removeRow(0);
 		}
-		for (Videojuego vid : buscVideojuego) {
-			arrIdVideojuego.add(vid.getIdVideojuego());
+		for (Videojuego vid : arrIdVideojuego) {
 			modVideojuego.addRow(new Object[] { vid.getTitulo(), vid.getGenero(), vid.getCantidadStock() });
 		}
 		
 		// Tabla Cliente
-				List<Cliente> buscCliente = Main.clienteDao.buscarTodos();
+				arrIdCliente = (ArrayList<Cliente>) Main.clienteDao.buscarTodos();
 				DefaultTableModel modCliente = (DefaultTableModel) Window.tablaCliente.getModel();
 				int contador2 = Window.tablaCliente.getRowCount();
 				for (int i = 0; contador2 > i; i++)
 					modCliente.removeRow(0);
-				for (Cliente cli : buscCliente) {
-					arrIdCliente.add(cli.getIdCliente());
+				for (Cliente cli : arrIdCliente) {
 					modCliente.addRow(new Object[] { cli.getNombre(), cli.getDni(), cli.getSaldo() });
 				}
 				// Tabla Venta
-				List<Venta> buscVenta = Main.ventaDao.buscarTodos();
+				arrIdVenta = (ArrayList<Venta>) Main.ventaDao.buscarTodos();
 				DefaultTableModel modVenta = (DefaultTableModel) Window.tablaVenta.getModel();
 				int contador3 = Window.tablaVenta.getRowCount();
 				for (int i = 0; contador3 > i; i++)
 					modVenta.removeRow(0);
-				for (Venta vent : buscVenta) {
-					arrIdVenta.add(vent.getIdVenta());
+				for (Venta vent : arrIdVenta) {
 						//modVenta
 					//		.addRow(new Object[] { vent.getIdVideojuegoFK().getTitulo(), vent.getCliente().getTitulo(), vent.getPapel() });
 						//	.addRow(new Object[] { vent. });

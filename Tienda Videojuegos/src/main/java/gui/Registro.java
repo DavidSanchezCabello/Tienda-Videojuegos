@@ -42,6 +42,7 @@ public class Registro extends JFrame{
 				contenedor.add(btnConfirmar);
 				contenedor.add(btnCancelar);
 				btnConfirmar.addActionListener(Evento.getEventoRegistro());
+				btnCancelar.addActionListener(Evento.getEventoRegistro());
 				setContentPane(contenedor);
 				setTitle("Nuevo");
 				break;
@@ -55,6 +56,7 @@ public class Registro extends JFrame{
 				contenedor.add(btnConfirmar);
 				contenedor.add(btnCancelar);
 				btnConfirmar.addActionListener(Evento.getEventoRegistro());
+				btnCancelar.addActionListener(Evento.getEventoRegistro());
 				setContentPane(contenedor);
 				setTitle("Modificar");
 				break;
