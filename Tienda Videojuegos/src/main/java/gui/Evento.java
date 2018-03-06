@@ -49,12 +49,18 @@ public class Evento {
 					if(Main.ventanaPrincipal.pestañas.getSelectedIndex() == 0) {
 						Main.ventanaPrincipal.tablaCliente.clearSelection();
 						Main.ventanaPrincipal.tablaVenta.clearSelection();
+						Main.ventanaPrincipal.tablaVideojuego.setRowSelectionInterval(0, 0);
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVideojuego.get(Main.ventanaPrincipal.tablaVideojuego.getSelectedRow());
 					} else if(Main.ventanaPrincipal.pestañas.getSelectedIndex() == 1) {
 						Main.ventanaPrincipal.tablaVideojuego.clearSelection();
 						Main.ventanaPrincipal.tablaVenta.clearSelection();
+						Main.ventanaPrincipal.tablaCliente.setRowSelectionInterval(0, 0);
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdCliente.get(Main.ventanaPrincipal.tablaCliente.getSelectedRow());
 					} else {
+						Main.ventanaPrincipal.tablaVideojuego.clearSelection();
 						Main.ventanaPrincipal.tablaCliente.clearSelection();
-						Main.ventanaPrincipal.tablaCliente.clearSelection();
+						Main.ventanaPrincipal.tablaVenta.setRowSelectionInterval(0, 0);
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVenta.get(Main.ventanaPrincipal.tablaVenta.getSelectedRow());
 					}
 					Main.ventanaPrincipal.tabla = null;
 				} else if (e.getSource().equals(Main.ventanaPrincipal.tablaVideojuego)) {
@@ -90,7 +96,7 @@ public class Evento {
 				String[] campos = null, datos = null;
 				String nombreClase = null;
 				if (!e.getSource().equals(Main.ventanaPrincipal.btnBorrar)){
-					if(Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Cliente")) {
+					if(Main.ventanaPrincipal.pestañas.getTitleAt(Main.ventanaPrincipal.pestañas.getSelectedIndex()).equals("Cliente")) {
 						nombreClase = "Cliente";
 						campos = new String[6];
 						campos[0] = "Identificación: ";
@@ -110,7 +116,7 @@ public class Evento {
 						} else {
 							datos = new String[0];
 						}
-					} else if (Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Videojuego")) {
+					} else if (Main.ventanaPrincipal.pestañas.getTitleAt(Main.ventanaPrincipal.pestañas.getSelectedIndex()).equals("Videojuego")) {
 						nombreClase = "Videojuego";
 						campos = new String[6];
 						campos[0] = "Identificación: ";

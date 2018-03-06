@@ -46,9 +46,9 @@ public class Window extends JFrame {
 		setTitle("Menú");
 		
 		pestañas.setBounds(60, 0, 500, 250);
-		pestañas.addTab("Videojuegos", pnVid);
-		pestañas.addTab("Clientes", pnCli);
-		pestañas.addTab("Ventas", pnVent);
+		pestañas.addTab("Videojuego", pnVid);
+		pestañas.addTab("Cliente", pnCli);
+		pestañas.addTab("Venta", pnVent);
 		add(pestañas);
 
 		// Para no editarlo con doble clic
