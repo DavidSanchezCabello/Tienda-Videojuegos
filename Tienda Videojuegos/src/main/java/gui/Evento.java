@@ -49,18 +49,18 @@ public class Evento {
 					if(Main.ventanaPrincipal.pestañas.getSelectedIndex() == 0) {
 						Main.ventanaPrincipal.tablaCliente.clearSelection();
 						Main.ventanaPrincipal.tablaVenta.clearSelection();
-						Main.ventanaPrincipal.tablaVideojuego.setRowSelectionInterval(0, 0);
-						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVideojuego.get(Main.ventanaPrincipal.tablaVideojuego.getSelectedRow());
+						/*Main.ventanaPrincipal.tablaVideojuego.setRowSelectionInterval(0, 0);
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVideojuego.get(Main.ventanaPrincipal.tablaVideojuego.getSelectedRow());*/
 					} else if(Main.ventanaPrincipal.pestañas.getSelectedIndex() == 1) {
 						Main.ventanaPrincipal.tablaVideojuego.clearSelection();
 						Main.ventanaPrincipal.tablaVenta.clearSelection();
-						Main.ventanaPrincipal.tablaCliente.setRowSelectionInterval(0, 0);
-						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdCliente.get(Main.ventanaPrincipal.tablaCliente.getSelectedRow());
+						/*Main.ventanaPrincipal.tablaCliente.setRowSelectionInterval(0, 0);
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdCliente.get(Main.ventanaPrincipal.tablaCliente.getSelectedRow());*/
 					} else {
 						Main.ventanaPrincipal.tablaVideojuego.clearSelection();
 						Main.ventanaPrincipal.tablaCliente.clearSelection();
-						Main.ventanaPrincipal.tablaVenta.setRowSelectionInterval(0, 0);
-						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVenta.get(Main.ventanaPrincipal.tablaVenta.getSelectedRow());
+						/*Main.ventanaPrincipal.tablaVenta.setRowSelectionInterval(0, 0);
+						Main.ventanaPrincipal.tabla = Main.ventanaPrincipal.arrIdVenta.get(Main.ventanaPrincipal.tablaVenta.getSelectedRow());*/
 					}
 					Main.ventanaPrincipal.tabla = null;
 				} else if (e.getSource().equals(Main.ventanaPrincipal.tablaVideojuego)) {
@@ -95,123 +95,135 @@ public class Evento {
 			public void actionPerformed(ActionEvent e) {
 				String[] campos = null, datos = null;
 				String nombreClase = null;
-				if (!e.getSource().equals(Main.ventanaPrincipal.btnBorrar)){
-					if(Main.ventanaPrincipal.pestañas.getTitleAt(Main.ventanaPrincipal.pestañas.getSelectedIndex()).equals("Cliente")) {
-						nombreClase = "Cliente";
-						campos = new String[6];
-						campos[0] = "Identificación: ";
-						campos[1]= "Nombre: ";
-						campos[2]= "Apellidos: ";
-						campos[3]= "Fecha de nacimiento: ";
-						campos[4]= "DNI: ";
-						campos[5]= "Saldo: ";
-						if(!e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
-							datos = new String[6];
-							datos[0] = Integer.toString(((Cliente)Main.ventanaPrincipal.tabla).getIdCliente());
-							datos[1] = ((Cliente)Main.ventanaPrincipal.tabla).getNombre();
-							datos[2] = ((Cliente)Main.ventanaPrincipal.tabla).getApellido();
-							datos[3] = ((Cliente)Main.ventanaPrincipal.tabla).getFechaNacimiento();
-							datos[4] = ((Cliente)Main.ventanaPrincipal.tabla).getDni();
-							datos[5] = Float.toString(((Cliente)Main.ventanaPrincipal.tabla).getSaldo());
-						} else {
-							datos = new String[0];
-						}
-					} else if (Main.ventanaPrincipal.pestañas.getTitleAt(Main.ventanaPrincipal.pestañas.getSelectedIndex()).equals("Videojuego")) {
-						nombreClase = "Videojuego";
-						campos = new String[6];
-						campos[0] = "Identificación: ";
-						campos[1]= "Titulo: ";
-						campos[2]= "Versión: ";
-						campos[3]= "Género: ";
-						campos[4]= "Tipo de licencia: ";
-						campos[5]= "Cantidad en stock: ";
-						if(!e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
-							datos = new String[6];
-							datos[0] = Integer.toString(((Videojuego)Main.ventanaPrincipal.tabla).getIdVideojuego());
-							datos[1] = ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo();
-							datos[2] = ((Videojuego)Main.ventanaPrincipal.tabla).getVersion();
-							datos[3] = ((Videojuego)Main.ventanaPrincipal.tabla).getGenero();
-							datos[4] = ((Videojuego)Main.ventanaPrincipal.tabla).getTipoLicencia();
-							datos[5] = Integer.toString(((Videojuego)Main.ventanaPrincipal.tabla).getCantidadStock());
-						} else {
-							datos = new String[0];
-						}
-					} else {
-						nombreClase = "Venta";
-						campos = new String[5];
-						campos[0] = "Id de venta ";
-						campos[1]= "Id de videojuego: ";
-						campos[2]= "Id de cliente: ";
-						campos[3]= "Licencia: ";
-						campos[4]= "Suscripción: ";
-						if(!e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
-							datos = new String[5];
-							datos[0] = Integer.toString(((Venta)Main.ventanaPrincipal.tabla).getIdVenta());
-							datos[1] = Integer.toString(((Venta)Main.ventanaPrincipal.tabla).getIdVideojuegoFK());
-							datos[2] = Integer.toString(((Venta)Main.ventanaPrincipal.tabla).getIdClienteFK());
-							datos[3] = ((Venta)Main.ventanaPrincipal.tabla).getLicencia();
-							if (((Venta)Main.ventanaPrincipal.tabla).isSuscripcion()) {
-								datos[4] = "Verdadero";
+				try {
+					if (!e.getSource().equals(Main.ventanaPrincipal.btnBorrar)){
+						if(Main.ventanaPrincipal.pestañas.getTitleAt(Main.ventanaPrincipal.pestañas.getSelectedIndex()).equals("Cliente")) {
+							nombreClase = "Cliente";
+							campos = new String[6];
+							campos[0] = "Identificación: ";
+							campos[1]= "Nombre: ";
+							campos[2]= "Apellidos: ";
+							campos[3]= "Fecha de nacimiento: ";
+							campos[4]= "DNI: ";
+							campos[5]= "Saldo: ";
+							if(!e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
+								datos = new String[6];
+								datos[0] = Integer.toString(((Cliente)Main.ventanaPrincipal.tabla).getIdCliente());
+								datos[1] = ((Cliente)Main.ventanaPrincipal.tabla).getNombre();
+								datos[2] = ((Cliente)Main.ventanaPrincipal.tabla).getApellido();
+								datos[3] = ((Cliente)Main.ventanaPrincipal.tabla).getFechaNacimiento();
+								datos[4] = ((Cliente)Main.ventanaPrincipal.tabla).getDni();
+								datos[5] = Float.toString(((Cliente)Main.ventanaPrincipal.tabla).getSaldo());
 							} else {
-								datos[4] = "Falso";
+								datos = new String[0];
+							}
+						} else if (Main.ventanaPrincipal.pestañas.getTitleAt(Main.ventanaPrincipal.pestañas.getSelectedIndex()).equals("Videojuego")) {
+							nombreClase = "Videojuego";
+							campos = new String[6];
+							campos[0] = "Identificación: ";
+							campos[1]= "Titulo: ";
+							campos[2]= "Versión: ";
+							campos[3]= "Género: ";
+							campos[4]= "Tipo de licencia: ";
+							campos[5]= "Cantidad en stock: ";
+							if(!e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
+								datos = new String[6];
+								datos[0] = Integer.toString(((Videojuego)Main.ventanaPrincipal.tabla).getIdVideojuego());
+								datos[1] = ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo();
+								datos[2] = ((Videojuego)Main.ventanaPrincipal.tabla).getVersion();
+								datos[3] = ((Videojuego)Main.ventanaPrincipal.tabla).getGenero();
+								datos[4] = ((Videojuego)Main.ventanaPrincipal.tabla).getTipoLicencia();
+								datos[5] = Integer.toString(((Videojuego)Main.ventanaPrincipal.tabla).getCantidadStock());
+							} else {
+								datos = new String[0];
 							}
 						} else {
-							datos = new String[0];
-						}
-					}	
-				}
-				if (e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
-					registro = new Registro(2, campos, datos, nombreClase);
-				} else if (e.getSource().equals(Main.ventanaPrincipal.btnBorrar)) {
-					List<Venta> registrosFK;
-					if(Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Cliente")) {
-						int eleccion = JOptionPane.showConfirmDialog(null,
-								"Estas a punto de borrar el registro con nombre "
-								+ ((Cliente)Main.ventanaPrincipal.tabla).getNombre()
-								+ ". ¿Deseas continuar?", "¡Borrar cliente!", JOptionPane.YES_NO_OPTION);
-						if(eleccion == 0) {
-							registrosFK = Main.ventaDao.buscarPorClienteFK((Cliente)Main.ventanaPrincipal.tabla);
-							borrado(registrosFK);
-							try {
-								Main.clienteDao.borrar((Cliente)Main.ventanaPrincipal.tabla);
-								Main.ventanaPrincipal.generarTablas();
-							} catch (NumberFormatException | IOException e1) {
-								e1.printStackTrace();
+							nombreClase = "Venta";
+							campos = new String[5];
+							campos[0] = "Id de venta ";
+							campos[1]= "Videojuego: ";
+							campos[2]= "Cliente: ";
+							campos[3]= "Licencia: ";
+							campos[4]= "Suscripción: ";
+							if(!e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
+								datos = new String[5];
+								datos[0] = Integer.toString(((Venta)Main.ventanaPrincipal.tabla).getIdVenta());
+								Videojuego videojuegoFK = Main.videojuegoDao
+										.buscarPorID(((Venta)Main.ventanaPrincipal.tabla).getIdVideojuegoFK());
+								datos[1] = videojuegoFK.getTitulo();
+								Cliente clienteFK = Main.clienteDao
+										.buscarPorID(((Venta)Main.ventanaPrincipal.tabla).getIdClienteFK());
+								datos[2] = clienteFK.getNombre();
+								datos[3] = ((Venta)Main.ventanaPrincipal.tabla).getLicencia();
+								if (((Venta)Main.ventanaPrincipal.tabla).isSuscripcion()) {
+									datos[4] = "Verdadero";
+								} else {
+									datos[4] = "Falso";
+								}
+							} else {
+								datos = new String[0];
 							}
-						}
-					} else if (Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Videojuego")) {
-						int eleccion = JOptionPane.showConfirmDialog(null,
-								"Estas a punto de borrar el registro con nombre "
-								+ ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo()
-								+ ". ¿Deseas continuar?", "¡Borrar videojuego!", JOptionPane.YES_NO_OPTION);
-						if(eleccion == 0) {
-							registrosFK = Main.ventaDao.buscarPorVideojuegoFK((Videojuego)Main.ventanaPrincipal.tabla);
-							borrado(registrosFK);
-							try {
-								Main.videojuegoDao.borrar((Videojuego)Main.ventanaPrincipal.tabla);
-								Main.ventanaPrincipal.generarTablas();
-							} catch (NumberFormatException | IOException e1) {
-								e1.printStackTrace();
-							}
-						}
-					} else {
-						int eleccion = JOptionPane.showConfirmDialog(null,
-								"Estas a punto de borrar el registro con nombre "
-								+ ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo()
-								+ ". ¿Deseas continuar?", "¡Borrar venta!", JOptionPane.YES_NO_OPTION);
-						if(eleccion == 0) {
-							try {
-								Main.ventaDao.borrar((Venta)Main.ventanaPrincipal.tabla);
-								Main.ventanaPrincipal.generarTablas();
-							} catch (NumberFormatException | IOException e1) {
-								e1.printStackTrace();
-							}
-						}
+						}	
 					}
-				} else if (e.getSource().equals(Main.ventanaPrincipal.btnModi)) {
-					registro = new Registro(3, campos, datos, nombreClase);
-				} else if (e.getSource().equals(Main.ventanaPrincipal.btnVer)) {
-					registro = new Registro(1, campos, datos, nombreClase);
+					if (e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
+						registro = new Registro(2, campos, datos, nombreClase);
+					} else if (e.getSource().equals(Main.ventanaPrincipal.btnBorrar)) {
+						List<Venta> registrosFK;
+						if(Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Cliente")) {
+							int eleccion = JOptionPane.showConfirmDialog(null,
+									"Estas a punto de borrar el registro con nombre "
+									+ ((Cliente)Main.ventanaPrincipal.tabla).getNombre()
+									+ ". ¿Deseas continuar?", "¡Borrar cliente!", JOptionPane.YES_NO_OPTION);
+							if(eleccion == 0) {
+								registrosFK = Main.ventaDao.buscarPorClienteFK((Cliente)Main.ventanaPrincipal.tabla);
+								borrado(registrosFK);
+								try {
+									Main.clienteDao.borrar((Cliente)Main.ventanaPrincipal.tabla);
+									Main.ventanaPrincipal.generarTablas();
+								} catch (NumberFormatException | IOException e1) {
+									e1.printStackTrace();
+								}
+							}
+						} else if (Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Videojuego")) {
+							int eleccion = JOptionPane.showConfirmDialog(null,
+									"Estas a punto de borrar el registro de titulo "
+									+ ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo()
+									+ ". ¿Deseas continuar?", "¡Borrar videojuego!", JOptionPane.YES_NO_OPTION);
+							if(eleccion == 0) {
+								registrosFK = Main.ventaDao.buscarPorVideojuegoFK((Videojuego)Main.ventanaPrincipal.tabla);
+								borrado(registrosFK);
+								try {
+									Main.videojuegoDao.borrar((Videojuego)Main.ventanaPrincipal.tabla);
+									Main.ventanaPrincipal.generarTablas();
+								} catch (NumberFormatException | IOException e1) {
+									e1.printStackTrace();
+								}
+							}
+						} else {
+							Videojuego videojuegoFK = Main.videojuegoDao
+									.buscarPorID(((Venta)Main.ventanaPrincipal.tabla).getIdVideojuegoFK());
+							Cliente clienteFK = Main.clienteDao
+									.buscarPorID(((Venta)Main.ventanaPrincipal.tabla).getIdClienteFK());
+							int eleccion = JOptionPane.showConfirmDialog(null,
+									"Estas a punto de borrar el registro de relación del videojuego "
+											+ videojuegoFK.getTitulo() + " con el cliente " + clienteFK.getNombre()
+											+ ". ¿Deseas continuar?", "¡Borrar venta!", JOptionPane.YES_NO_OPTION);
+							if(eleccion == 0) {
+								try {
+									Main.ventaDao.borrar((Venta)Main.ventanaPrincipal.tabla);
+									Main.ventanaPrincipal.generarTablas();
+								} catch (NumberFormatException | IOException e1) {
+									e1.printStackTrace();
+								}
+							}
+						}
+					} else if (e.getSource().equals(Main.ventanaPrincipal.btnModi)) {
+						registro = new Registro(3, campos, datos, nombreClase);
+					} else if (e.getSource().equals(Main.ventanaPrincipal.btnVer)) {
+						registro = new Registro(1, campos, datos, nombreClase);
+					}
+				} catch (NullPointerException npe) {
+					JOptionPane.showMessageDialog(null, "¡Seleccione una fila (un registro) para realizar la acción!", "¡Registro no seleccionado!", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		};
@@ -304,8 +316,8 @@ public class Evento {
 						}
 					} else {
 						//TODO Listener boton confimar cuando estar cargado la tabla venta
-						/*if (Pattern.matches(Evento.INT, registro.datos.get(1).getText())) {
-							if (Pattern.matches(Evento.INT, registro.datos.get(2).getText())) {
+						if (registro.datos.get(1).getText().length() <= 80) {
+							if (registro.datos.get(1).getText().length() <= 45) {
 								if (registro.datos.get(3).getText().length() <= 45) {
 									if (registro.datos.get(4).getText().equals("Verdadero") ||
 											registro.datos.get(4).getText().equals("Falso")) {
@@ -313,30 +325,44 @@ public class Evento {
 										if(registro.datos.get(4).getText().equals("Verdadero")) {
 											suscripcion = true;
 										}
-										if (registro.btnConfirmar.getText().equals("Guardar")) {
-											Main.ventaDao.guardar(new Venta(Integer.parseInt(registro.datos.get(1).getText()),
-													Integer.parseInt(registro.datos.get(2).getText()),
-													registro.datos.get(3).getText(),
-													suscripcion));
-										} else {
-											Main.ventaDao.modificar(new Venta(Integer.parseInt(registro.datos.get(0).getText()),
-													Integer.parseInt(registro.datos.get(1).getText()),
-													Integer.parseInt(registro.datos.get(2).getText()),
-													registro.datos.get(3).getText(),
-													suscripcion));
+										try {
+											Videojuego videojuegoFK = Main.videojuegoDao
+													.buscarPorTitulo(registro.datos.get(1).getText());
+											Cliente clienteFK = Main.clienteDao
+													.buscarPorNombre(registro.datos.get(2).getText());
+											if (registro.btnConfirmar.getText().equals("Guardar")) {
+												Main.ventaDao.guardar(new Venta(0, videojuegoFK.getIdVideojuego(),
+														clienteFK.getIdCliente(),
+														registro.datos.get(3).getText(),
+														suscripcion));
+												Main.ventanaPrincipal.generarTablas();
+												registro.cerrarVentana();
+											} else {
+												Main.ventaDao.modificar(new Venta(Integer.parseInt(registro.datos.get(0).getText()),
+														videojuegoFK.getIdVideojuego(),
+														clienteFK.getIdCliente(),
+														registro.datos.get(3).getText(),
+														suscripcion));
+												Main.ventanaPrincipal.generarTablas();
+												registro.cerrarVentana();
+											}
+										} catch (NullPointerException npe) {
+											JOptionPane.showMessageDialog(null, "No se puede relacionar el videojuego y/o el cliente indicado." 
+													+ " Comprueba que esta introducido correctamente con uno existente.",
+													"¡Imposible relacionar!", JOptionPane.WARNING_MESSAGE);
 										}
 									} else {
-										dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
+										dialogoError("Valor incorrecto en suscripción. Introduzca verdadero o falso.");
 									}
 								} else {
-									dialogoError("El género no puede tener más de 45 carácteres.");
+									dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
 								}
 							} else {
-								dialogoError("La versión no puede tener más de 20 carácteres.");
+								dialogoError("El nombre del cliente no puede tener más de 45 carácteres. Ademas tiene que coincidir con algun registro de videojuego existente.");
 							}
 						} else {
-							dialogoError("El titulo no puede tener más de 80 carácteres.");
-						}*/
+							dialogoError("El titulo del videojuego no puede tener más de 80 carácteres. Ademas tiene que coincidir con algun registro de videojuego existente.");
+						}
 					}
 				} else {
 					registro.cerrarVentana();

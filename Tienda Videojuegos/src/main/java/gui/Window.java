@@ -69,7 +69,7 @@ public class Window extends JFrame {
 		tablaCliente.setModel(new DefaultTableModel(new Object[][]{},
 				new String[]{"Nombre", "DNI", "Saldo"}));
 		tablaVenta.setModel(new DefaultTableModel(new Object[][]{},
-				new String[]{"IdVideojuegoFK", "fechaAdquirido", "Licencia"}));
+				new String[]{"Videojuego", "Cliente", "Licencia"}));
 
 		btnNuevo.setBounds(5, 20, 50, 50);
 		// icono al botón

@@ -48,7 +48,7 @@ public class ClienteDAO {
 	@SuppressWarnings("unchecked")
 	public Cliente buscarPorNombre(String nombre) {
 		Cliente cli;
-		Query<Cliente> consulta = session.createQuery("from Cliente where nombreCliente='" + nombre + "'");
+		Query<Cliente> consulta = session.createQuery("from Cliente where nombre='" + nombre + "'");
 		cli = consulta.uniqueResult();
 		return cli;
 	}

@@ -27,6 +27,12 @@ public class VentaDAO {
 	}
 	
 	public void modificar(Venta ven) {
+		/*Venta actualizar = buscarPorID(ven.getIdVenta());
+		actualizar.setIdVideojuegoFK(ven.getIdVideojuegoFK());
+		actualizar.setIdClienteFK(ven.getIdClienteFK());
+		actualizar.setLicencia(ven.getLicencia());
+		actualizar.setSuscripcion(ven.isSuscripcion());
+		session.update(actualizar);*/
 		session.beginTransaction();
 		session.merge(ven);
 		session.getTransaction().commit();

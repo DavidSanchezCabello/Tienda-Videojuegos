@@ -19,13 +19,15 @@ public class Registro extends JFrame{
 	protected ArrayList<JTextField> datos;
 	protected JButton btnConfirmar, btnCancelar;
 	protected String nombreClase;
+	private int caso;
 	
 	public Registro(int tipoAccion, String[] campos, String[] datos, String nombreClase) {
 		this.nombreClase = nombreClase;
+		caso = tipoAccion;
 		switch (tipoAccion) {
 			case 1: {
-				Container contenedor = añadirCampos(campos, datos, true);
 				btnCancelar = new JButton("Aceptar");
+				Container contenedor = añadirCampos(campos, datos, true);
 				btnCancelar.setBounds(75, 165, 85, 25);
 				contenedor.add(btnCancelar);
 				btnCancelar.addActionListener(Evento.getEventoRegistro());
@@ -100,9 +102,9 @@ public class Registro extends JFrame{
 				}
 			}
 		}
-		for (int x = 0; x < this.campos.size(); x++) {
+		for (int x = 1; x < this.campos.size(); x++) {
 			tabla.setRows(tabla.getRows() + 1);
-			if (x == 0 || (x <= 2 && nombreClase.equals("Venta"))) {
+			if (caso == 1) {
 				this.datos.get(x).setEditable(false);
 			}
 			panelCampos.add(this.campos.get(x));
