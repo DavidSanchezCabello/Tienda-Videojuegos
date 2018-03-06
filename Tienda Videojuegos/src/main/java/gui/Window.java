@@ -187,18 +187,10 @@ public class Window extends JFrame implements ActionListener, MouseListener {
 				for (int i = 0; contador3 > i; i++)
 					modVenta.removeRow(0);
 				for (Venta vent : arrIdVenta) {
-						//modVenta
-					//		.addRow(new Object[] { vent.getIdVideojuegoFK().getTitulo(), vent.getCliente().getTitulo(), vent.getPapel() });
-						//	.addRow(new Object[] { vent. });
+					Videojuego videojuegoFK = Main.videojuegoDao.buscarPorID(vent.getIdVideojuegoFK());
+					Cliente clienteFK = Main.clienteDao.buscarPorID(vent.getIdClienteFK());
+					modVenta.addRow(new Object[] { videojuegoFK.getTitulo(), clienteFK.getNombre(), vent.getLicencia() });
 				}
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	@Override
