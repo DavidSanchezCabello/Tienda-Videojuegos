@@ -231,6 +231,7 @@ public class Evento {
 														registro.datos.get(4).getText(),
 														Float.parseFloat(registro.datos.get(5).getText())));
 												Main.ventanaPrincipal.generarTablas();
+												registro.cerrarVentana();
 											} else {
 												Main.clienteDao.modificar(new Cliente(Integer.parseInt(registro.datos.get(0).getText()),
 														registro.datos.get(1).getText(),
@@ -239,6 +240,7 @@ public class Evento {
 														registro.datos.get(4).getText(),
 														Float.parseFloat(registro.datos.get(5).getText())));
 												Main.ventanaPrincipal.generarTablas();
+												registro.cerrarVentana();
 											}
 										} else {
 											dialogoError("El saldo no es correcto. Por favor introduzcalo como número decimal con \".\"");
@@ -268,6 +270,7 @@ public class Evento {
 														registro.datos.get(4).getText(),
 														Integer.parseInt(registro.datos.get(5).getText())));
 												Main.ventanaPrincipal.generarTablas();
+												registro.cerrarVentana();
 											} else {
 												Main.videojuegoDao.modificar(new Videojuego(Integer.parseInt(registro.datos.get(0).getText()),
 														registro.datos.get(1).getText(),
@@ -276,6 +279,7 @@ public class Evento {
 														registro.datos.get(4).getText(),
 														Integer.parseInt(registro.datos.get(5).getText())));
 												Main.ventanaPrincipal.generarTablas();
+												registro.cerrarVentana();
 											}
 										} else {
 											dialogoError("La cantidad de stock no es correcto. Por favor introduzcalo con un número");
@@ -329,8 +333,7 @@ public class Evento {
 						}*/
 					}
 				} else {
-					registro.setVisible(false);
-					registro.dispose();
+					registro.cerrarVentana();
 				}
 			}
 		};

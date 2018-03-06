@@ -71,8 +71,7 @@ public class Registro extends JFrame{
 		addWindowListener(new WindowAdapter() {
 			@Override
 		    public void windowClosing(WindowEvent e) {
-				setVisible(false);
-				dispose();
+				cerrarVentana();
 		    }
 		});
 		setVisible(true);
@@ -110,5 +109,9 @@ public class Registro extends JFrame{
 			panelCampos.add(this.datos.get(x));
 		}
 		return contenedor;
+	}
+	protected void cerrarVentana() {
+		setVisible(false);
+		dispose();
 	}
 }

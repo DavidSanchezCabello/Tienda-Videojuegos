@@ -114,7 +114,6 @@ public class Window extends JFrame {
 		tablaVenta.addMouseListener(Evento.getEventoWindowMouse());
 
 		setIconImage(new ImageIcon("Icon.png").getImage());
-		// add(scroll, BorderLayout.CENTER);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(580, 300);
 		setResizable(false);
@@ -136,7 +135,7 @@ public class Window extends JFrame {
 				.getModel();
 		int contador = Window.tablaVideojuego.getRowCount();
 		for (int i = 0; contador > i; i++) {
-			modVideojuego.removeRow(i);
+			modVideojuego.removeRow(0);
 		}
 
 		for (Videojuego vid : arrIdVideojuego) {
@@ -150,7 +149,7 @@ public class Window extends JFrame {
 				.getModel();
 		int contador2 = Window.tablaCliente.getRowCount();
 		for (int i = 0; contador2 > i; i++) {
-			modCliente.removeRow(i);
+			modCliente.removeRow(0);
 		}
 		for (Cliente cli : arrIdCliente) {
 			modCliente.addRow(new Object[]{cli.getNombre(), cli.getDni(),
@@ -162,7 +161,7 @@ public class Window extends JFrame {
 				.getModel();
 		int contador3 = Window.tablaVenta.getRowCount();
 		for (int i = 0; contador3 > i; i++) {
-			modVenta.removeRow(i);
+			modVenta.removeRow(0);
 		}
 		for (Venta vent : arrIdVenta) {
 			Videojuego videojuegoFK = Main.videojuegoDao
