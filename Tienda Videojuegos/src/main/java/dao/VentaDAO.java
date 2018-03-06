@@ -16,7 +16,9 @@ public class VentaDAO {
 	private Session session = HibernateUtil.getSession();
 	
 	public void guardar(Venta ven) {
+		session.beginTransaction();
 		session.save(ven);
+		session.getTransaction().commit();
 	}
 	
 	public Venta buscarPorID(Integer id) {
@@ -25,11 +27,15 @@ public class VentaDAO {
 	}
 	
 	public void modificar(Venta ven) {
-		session.update(ven);
+		session.beginTransaction();
+		session.merge(ven);
+		session.getTransaction().commit();
 	}
 	
 	public void borrar(Venta ven) throws NumberFormatException, IOException {
+		session.beginTransaction();
 		session.delete(ven);
+		session.getTransaction().commit();
 	}
 	
 	@SuppressWarnings("unchecked")

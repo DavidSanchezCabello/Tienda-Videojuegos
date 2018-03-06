@@ -14,7 +14,9 @@ public class VideojuegoDAO {
 	private Session session = HibernateUtil.getSession();
 	
 	public void guardar(Videojuego vid) {
+		session.beginTransaction();
 		session.save(vid);
+		session.getTransaction().commit();
 	}
 	
 	public Videojuego buscarPorID(Integer id) {
@@ -23,11 +25,15 @@ public class VideojuegoDAO {
 	}
 	
 	public void modificar(Videojuego vid) {
-		session.update(vid);
+		session.beginTransaction();
+		session.merge(vid);
+		session.getTransaction().commit();
 	}
 	
 	public void borrar(Videojuego vid) throws NumberFormatException, IOException {
+		session.beginTransaction();
 		session.delete(vid);
+		session.getTransaction().commit();
 	}
 	
 	@SuppressWarnings("unchecked")

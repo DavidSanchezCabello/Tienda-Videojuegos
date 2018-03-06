@@ -15,7 +15,9 @@ public class ClienteDAO {
 
 
 	public void guardar(Cliente cli) {
+		session.beginTransaction();
 		session.save(cli);
+		session.getTransaction().commit();
 	}
 
 	public Cliente buscarPorID(Integer id) {
@@ -24,11 +26,15 @@ public class ClienteDAO {
 	}
 
 	public void modificar(Cliente cli) {
-		session.update(cli);
+		session.beginTransaction();
+		session.merge(cli);
+		session.getTransaction().commit();
 	}
 
 	public void borrar(Cliente cli) throws NumberFormatException, IOException {
+		session.beginTransaction();
 		session.delete(cli);
+		session.getTransaction().commit();
 	}
 
 	@SuppressWarnings("unchecked")

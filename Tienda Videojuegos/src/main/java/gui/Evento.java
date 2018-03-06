@@ -163,7 +163,7 @@ public class Evento {
 								"Estas a punto de borrar el registro con nombre "
 								+ ((Cliente)Main.ventanaPrincipal.tabla).getNombre()
 								+ ". ¿Deseas continuar?", "¡Borrar cliente!", JOptionPane.YES_NO_OPTION);
-						if(eleccion == 1) {
+						if(eleccion == 0) {
 							registrosFK = Main.ventaDao.buscarPorClienteFK((Cliente)Main.ventanaPrincipal.tabla);
 							borrado(registrosFK);
 							
@@ -178,7 +178,7 @@ public class Evento {
 								"Estas a punto de borrar el registro con nombre "
 								+ ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo()
 								+ ". ¿Deseas continuar?", "¡Borrar videojuego!", JOptionPane.YES_NO_OPTION);
-						if(eleccion == 1) {
+						if(eleccion == 0) {
 							registrosFK = Main.ventaDao.buscarPorVideojuegoFK((Videojuego)Main.ventanaPrincipal.tabla);
 							borrado(registrosFK);
 							try {
@@ -192,7 +192,7 @@ public class Evento {
 								"Estas a punto de borrar el registro con nombre "
 								+ ((Videojuego)Main.ventanaPrincipal.tabla).getTitulo()
 								+ ". ¿Deseas continuar?", "¡Borrar venta!", JOptionPane.YES_NO_OPTION);
-						if(eleccion == 1) {
+						if(eleccion == 0) {
 							try {
 								Main.ventaDao.borrar((Venta)Main.ventanaPrincipal.tabla);
 							} catch (NumberFormatException | IOException e1) {
