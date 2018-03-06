@@ -94,7 +94,11 @@ public class Registro extends JFrame{
 				this.datos.add(new JTextField(datos[x]));
 			}
 			else {
-				this.datos.add(new JTextField());
+				if(x == 0) {
+					this.datos.add(new JTextField("0"));
+				} else {
+					this.datos.add(new JTextField());
+				}
 			}
 		}
 		for (int x = 0; x < this.campos.size(); x++) {
