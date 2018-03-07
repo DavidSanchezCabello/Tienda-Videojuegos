@@ -139,6 +139,7 @@ public class Window extends JFrame {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		System.out.println("Para ver el registro de JavaHelp, presiona F1.");
 		
 	}
 
