@@ -1,5 +1,11 @@
 package main.java;
 
+import java.io.File;
+import java.net.URL;
+
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+
 import main.java.dao.ClienteDAO;
 import main.java.dao.VentaDAO;
 import main.java.dao.VideojuegoDAO;
@@ -17,6 +23,9 @@ public class Main
 		videojuegoDao = new VideojuegoDAO();
 		ventaDao = new VentaDAO();
 		ventanaPrincipal = new Window();
+		
+		
+		
 	}
 	
 }

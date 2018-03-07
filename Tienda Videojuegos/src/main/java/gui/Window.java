@@ -1,8 +1,12 @@
 package main.java.gui;
 
 import java.awt.BorderLayout;
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -120,6 +124,22 @@ public class Window extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		generarTablas();
+		
+		try{
+			// Carga el fichero de ayuda
+			File fichero = new File("C:/Users/Luisao/git/Tienda-Videojuegos/help/help_set.hs");
+			URL hsURL = fichero.toURI().toURL();
+
+			// Crea el HelpSet
+			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+			HelpBroker hb = helpset.createHelpBroker();
+			// Ayuda al pulsar F1 sobre la ventana principal 
+			hb.enableHelpKey(getContentPane(), "ventana_principal", helpset);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 
 	public void generarTablas() {

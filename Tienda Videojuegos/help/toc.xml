@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc version="1.0">
+   <tocitem text="Game Store" target="aplicacion">
+      <tocitem text="Ventana Videojuego" target="ventana_videojuego"/>
+      <tocitem text="Ventana Cliente" target="ventana_cliente"/>
+      <tocitem text="Ventana Venta" target="ventana_venta"/>
+   </tocitem>
+</toc>
