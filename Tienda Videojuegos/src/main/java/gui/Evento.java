@@ -243,7 +243,8 @@ public class Evento {
 									if (Pattern.matches(Evento.DNI, registro.datos.get(4).getText())) {
 										if (Pattern.matches(Evento.FLOAT, registro.datos.get(5).getText())) {
 											if (registro.btnConfirmar.getText().equals("Guardar")) {
-												Main.clienteDao.guardar(new Cliente(registro.datos.get(1).getText(),
+												Main.clienteDao.guardar(new Cliente(0,
+														registro.datos.get(1).getText(),
 														registro.datos.get(2).getText(),
 														registro.datos.get(3).getText(),
 														registro.datos.get(4).getText(),
