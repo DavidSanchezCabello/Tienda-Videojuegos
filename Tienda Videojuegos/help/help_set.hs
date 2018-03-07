@@ -6,7 +6,7 @@ PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp HelpSet Version 1.0//EN"
    <title>JavaHelp: GameStore</title>
    <maps>
       <!-- Pagina por defecto al mostrar la ayuda -->
-      <homeID>aplicacion</homeID>
+      <homeID>tiendaVideojuegos</homeID>
       <!-- Que mapa deseamos -->
       <mapref location="map_file.jhm"/>
    </maps> 

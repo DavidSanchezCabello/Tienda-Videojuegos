@@ -127,14 +127,14 @@ public class Window extends JFrame {
 		
 		try{
 			// Carga el fichero de ayuda
-			File fichero = new File("C:/Users/Luisao/git/Tienda-Videojuegos/help/help_set.hs");
+			File fichero = new File("help/help_set.hs");
 			URL hsURL = fichero.toURI().toURL();
 
 			// Crea el HelpSet
 			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
 			HelpBroker hb = helpset.createHelpBroker();
 			// Ayuda al pulsar F1 sobre la ventana principal 
-			hb.enableHelpKey(getContentPane(), "ventana_principal", helpset);
+			hb.enableHelpKey(getContentPane(), "aplicacion", helpset);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
