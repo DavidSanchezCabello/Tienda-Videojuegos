@@ -283,7 +283,8 @@ public class Evento {
 									if (registro.datos.get(4).getText().length() <= 45) {
 										if (Pattern.matches(Evento.INT, registro.datos.get(5).getText())) {
 											if (registro.btnConfirmar.getText().equals("Guardar")) {
-												Main.videojuegoDao.guardar(new Videojuego(registro.datos.get(1).getText(),
+												Main.videojuegoDao.guardar(new Videojuego(0,
+														registro.datos.get(1).getText(),
 														registro.datos.get(2).getText(),
 														registro.datos.get(3).getText(),
 														registro.datos.get(4).getText(),
