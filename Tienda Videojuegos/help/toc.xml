@@ -4,5 +4,6 @@
       <tocitem text="Ventana Videojuego" target="ventana_videojuego"/>
       <tocitem text="Ventana Cliente" target="ventana_cliente"/>
       <tocitem text="Ventana Venta" target="ventana_venta"/>
+      <tocitem text="Resgistro" target="registro"/>
    </tocitem>
 </toc>

@@ -7,4 +7,5 @@ PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Index Version 1.0//EN"
    <indexitem text="Ventana Videojuego" target="ventana_videojuego"/>
    <indexitem text="Ventana Cliente" target="ventana_cliente"/>
     <indexitem text="Ventana Venta" target="ventana_venta"/>
+    <indexitem text="Registro" target="registro"/>
 </index>

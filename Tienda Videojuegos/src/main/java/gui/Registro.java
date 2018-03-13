@@ -98,7 +98,7 @@ public class Registro extends JFrame {
 			HelpBroker hb = helpset.createHelpBroker();
 
 			// Ayuda al pulsar F1 sobre la ventana principal
-			hb.enableHelpKey(getContentPane(), "aplicacion", helpset);
+			hb.enableHelpKey(getContentPane(), "registro", helpset);
 
 		} catch (Exception e) {
 			e.getStackTrace();
