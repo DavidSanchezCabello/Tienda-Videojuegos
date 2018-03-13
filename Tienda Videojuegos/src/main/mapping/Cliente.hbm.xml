@@ -6,7 +6,7 @@
 	<class name="main.java.tabla.Cliente" table="Cliente">
 		<id name="idCliente" type="integer">
 			<column name="idCliente" />
-			<generator class="assigned" />
+			<generator class="native" />
 		</id>
 		<property name="nombre" type="string">
 			<column name="nombre" length="45" />

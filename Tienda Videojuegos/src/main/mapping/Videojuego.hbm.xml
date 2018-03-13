@@ -6,7 +6,7 @@
 	<class name="main.java.tabla.Videojuego" table="Videojuego">
 		<id name="idVideojuego" type="integer" >
 			<column name="idVideojuego" not-null="true" unique="true"/>
-			<generator class="assigned" />
+			<generator class="native" />
 		</id>
 		<property name="titulo" type="string">
 			<column name="titulo" length="80" not-null="true"/>

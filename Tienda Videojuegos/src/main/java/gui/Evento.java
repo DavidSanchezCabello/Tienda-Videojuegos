@@ -166,7 +166,17 @@ public class Evento {
 						}	
 					}
 					if (e.getSource().equals(Main.ventanaPrincipal.btnNuevo)) {
-						registro = new Registro(2, campos, datos, nombreClase);
+						if(nombreClase.equals("Venta")) {
+							if(Main.ventanaPrincipal.tablaVideojuego.getRowCount() != 0 &&
+									Main.ventanaPrincipal.tablaCliente.getRowCount() != 0) {
+								registro = new Registro(2, campos, datos, nombreClase);
+							} else {
+								JOptionPane.showMessageDialog(null, "Necesitas tener registros en Videojuego y Cliente para registrar en Venta.", "¡No hay registros!", JOptionPane.WARNING_MESSAGE);
+							}
+						} else {
+							registro = new Registro(2, campos, datos, nombreClase);
+						}
+						
 					} else if (e.getSource().equals(Main.ventanaPrincipal.btnBorrar)) {
 						List<Venta> registrosFK;
 						if(Main.ventanaPrincipal.tabla.getClass().getSimpleName().equals("Cliente")) {
@@ -231,7 +241,6 @@ public class Evento {
 	}
 
 	protected static ActionListener getEventoRegistro() {
-		// TODO Listener de la clase Registro
 		ActionListener evento = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -317,53 +326,43 @@ public class Evento {
 							dialogoError("El titulo no puede tener más de 80 carácteres.");
 						}
 					} else {
-						//TODO Listener boton confimar cuando estar cargado la tabla venta
-						if (registro.datos.get(1).getText().length() <= 80) {
-							if (registro.datos.get(1).getText().length() <= 45) {
-								if (registro.datos.get(3).getText().length() <= 45) {
-									if (registro.datos.get(4).getText().equals("Verdadero") ||
-											registro.datos.get(4).getText().equals("Falso")) {
-										boolean suscripcion = false;
-										if(registro.datos.get(4).getText().equals("Verdadero")) {
-											suscripcion = true;
-										}
-										try {
-											Videojuego videojuegoFK = Main.videojuegoDao
-													.buscarPorTitulo(registro.datos.get(1).getText());
-											Cliente clienteFK = Main.clienteDao
-													.buscarPorNombre(registro.datos.get(2).getText());
-											if (registro.btnConfirmar.getText().equals("Guardar")) {
-												Main.ventaDao.guardar(new Venta(0, videojuegoFK.getIdVideojuego(),
-														clienteFK.getIdCliente(),
-														registro.datos.get(3).getText(),
-														suscripcion));
-												Main.ventanaPrincipal.generarTablas();
-												registro.cerrarVentana();
-											} else {
-												Main.ventaDao.modificar(new Venta(Integer.parseInt(registro.datos.get(0).getText()),
-														videojuegoFK.getIdVideojuego(),
-														clienteFK.getIdCliente(),
-														registro.datos.get(3).getText(),
-														suscripcion));
-												Main.ventanaPrincipal.generarTablas();
-												registro.cerrarVentana();
-											}
-										} catch (NullPointerException npe) {
-											JOptionPane.showMessageDialog(null, "No se puede relacionar el videojuego y/o el cliente indicado." 
-													+ " Comprueba que esta introducido correctamente con uno existente.",
-													"¡Imposible relacionar!", JOptionPane.WARNING_MESSAGE);
-										}
+						if (registro.datos.get(1).getText().length() <= 45) {
+							if (registro.datos.get(2).getText().equals("Verdadero")
+									|| registro.datos.get(2).getText().equals("Falso")) {
+								boolean suscripcion = false;
+								if (registro.datos.get(2).getText().equals("Verdadero")) {
+									suscripcion = true;
+								}
+								try {
+									Videojuego videojuegoFK = Main.videojuegoDao
+											.buscarPorTitulo(registro.titulos.getItemAt(registro.titulos.getSelectedIndex()));
+									Cliente clienteFK = Main.clienteDao
+											.buscarPorNombre(registro.nombres.getItemAt(registro.nombres.getSelectedIndex()));
+									if (registro.btnConfirmar.getText().equals("Guardar")) {
+										Main.ventaDao.guardar(
+												new Venta(0, videojuegoFK.getIdVideojuego(), clienteFK.getIdCliente(),
+														registro.datos.get(1).getText(), suscripcion));
+										Main.ventanaPrincipal.generarTablas();
+										registro.cerrarVentana();
 									} else {
-										dialogoError("Valor incorrecto en suscripción. Introduzca verdadero o falso.");
+										Main.ventaDao
+												.modificar(new Venta(Integer.parseInt(registro.datos.get(0).getText()),
+														videojuegoFK.getIdVideojuego(), clienteFK.getIdCliente(),
+														registro.datos.get(1).getText(), suscripcion));
+										Main.ventanaPrincipal.generarTablas();
+										registro.cerrarVentana();
 									}
-								} else {
-									dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
+								} catch (NullPointerException npe) {
+									JOptionPane.showMessageDialog(null,
+											"No se puede relacionar el videojuego y/o el cliente indicado."
+													+ " Comprueba que esta introducido correctamente con uno existente.",
+											"¡Imposible relacionar!", JOptionPane.WARNING_MESSAGE);
 								}
 							} else {
-								dialogoError("El nombre del cliente no puede tener más de 45 carácteres. Ademas tiene que coincidir con algun registro de videojuego existente.");
+								dialogoError("Valor incorrecto en suscripción. Introduzca verdadero o falso.");
 							}
 						} else {
-							dialogoError("El titulo del videojuego no puede tener más de 80 carácteres. Ademas tiene que coincidir con algun registro de videojuego existente.");
+							dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
 						}
 					}
 				} else {
