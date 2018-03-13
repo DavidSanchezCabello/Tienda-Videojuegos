@@ -4,8 +4,12 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Registro extends JFrame{
+public class Registro extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<JLabel> campos;
@@ -21,52 +25,52 @@ public class Registro extends JFrame{
 	protected JButton btnConfirmar, btnCancelar;
 	protected String nombreClase;
 	private int caso;
-	
+
 	public Registro(int tipoAccion, String[] campos, String[] datos, String nombreClase) {
 		this.nombreClase = nombreClase;
 		caso = tipoAccion;
 		switch (tipoAccion) {
-			case 1: {
-				btnCancelar = new JButton("Aceptar");
-				Container contenedor = añadirCampos(campos, datos, true);
-				btnCancelar.setBounds(75, 165, 85, 25);
-				contenedor.add(btnCancelar);
-				btnCancelar.addActionListener(Evento.getEventoRegistro());
-				setContentPane(contenedor);
-				setTitle("Consulta");
-				break;
-			}
-			case 2: {
-				Container contenedor = añadirCampos(campos, datos, false);
-				btnConfirmar = new JButton("Guardar");
-				btnConfirmar.setBounds(30, 165, 85, 25);
-				btnCancelar = new JButton("Cancelar");
-				btnCancelar.setBounds(125, 165, 85, 25);
-				contenedor.add(btnConfirmar);
-				contenedor.add(btnCancelar);
-				btnConfirmar.addActionListener(Evento.getEventoRegistro());
-				btnCancelar.addActionListener(Evento.getEventoRegistro());
-				setContentPane(contenedor);
-				setTitle("Nuevo");
-				break;
-			}
-			case 3: {
-				Container contenedor = añadirCampos(campos, datos, true);
-				btnConfirmar = new JButton("Actualizar");
-				btnConfirmar.setBounds(25, 165, 95, 25);
-				btnCancelar = new JButton("Cancelar");
-				btnCancelar.setBounds(135, 165, 85, 25);
-				contenedor.add(btnConfirmar);
-				contenedor.add(btnCancelar);
-				btnConfirmar.addActionListener(Evento.getEventoRegistro());
-				btnCancelar.addActionListener(Evento.getEventoRegistro());
-				setContentPane(contenedor);
-				setTitle("Modificar");
-				break;
-			}
-			default: {
-				System.out.println("¡Accion invalida!");
-			}
+		case 1: {
+			btnCancelar = new JButton("Aceptar");
+			Container contenedor = añadirCampos(campos, datos, true);
+			btnCancelar.setBounds(75, 165, 85, 25);
+			contenedor.add(btnCancelar);
+			btnCancelar.addActionListener(Evento.getEventoRegistro());
+			setContentPane(contenedor);
+			setTitle("Consulta");
+			break;
+		}
+		case 2: {
+			Container contenedor = añadirCampos(campos, datos, false);
+			btnConfirmar = new JButton("Guardar");
+			btnConfirmar.setBounds(30, 165, 85, 25);
+			btnCancelar = new JButton("Cancelar");
+			btnCancelar.setBounds(125, 165, 85, 25);
+			contenedor.add(btnConfirmar);
+			contenedor.add(btnCancelar);
+			btnConfirmar.addActionListener(Evento.getEventoRegistro());
+			btnCancelar.addActionListener(Evento.getEventoRegistro());
+			setContentPane(contenedor);
+			setTitle("Nuevo");
+			break;
+		}
+		case 3: {
+			Container contenedor = añadirCampos(campos, datos, true);
+			btnConfirmar = new JButton("Actualizar");
+			btnConfirmar.setBounds(25, 165, 95, 25);
+			btnCancelar = new JButton("Cancelar");
+			btnCancelar.setBounds(135, 165, 85, 25);
+			contenedor.add(btnConfirmar);
+			contenedor.add(btnCancelar);
+			btnConfirmar.addActionListener(Evento.getEventoRegistro());
+			btnCancelar.addActionListener(Evento.getEventoRegistro());
+			setContentPane(contenedor);
+			setTitle("Modificar");
+			break;
+		}
+		default: {
+			System.out.println("¡Accion invalida!");
+		}
 		}
 		setSize(250, 250);
 		setResizable(false);
@@ -74,13 +78,31 @@ public class Registro extends JFrame{
 		setIconImage(new ImageIcon("Icon.png").getImage());
 		addWindowListener(new WindowAdapter() {
 			@Override
-		    public void windowClosing(WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				cerrarVentana();
-		    }
+			}
 		});
 		setVisible(true);
+		try {
+
+			// Carga el fichero de ayuda
+			File fichero = new File("help/help_set.hs");
+			URL hsURL = fichero.toURI().toURL();
+
+			// Crea el HelpSet
+			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+			HelpBroker hb = helpset.createHelpBroker();
+
+			// Ayuda al pulsar F1 sobre la ventana principal
+			hb.enableHelpKey(getContentPane(), "aplicacion", helpset);
+
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+
 	}
-	private Container añadirCampos( String[] campos, String[] datos, boolean noEsNuevo) {
+
+	private Container añadirCampos(String[] campos, String[] datos, boolean noEsNuevo) {
 		Container contenedor = new Container();
 		contenedor.setLayout(null);
 		GridLayout tabla = new GridLayout(0, 2);
@@ -93,11 +115,10 @@ public class Registro extends JFrame{
 			JLabel etiqueta = new JLabel(campos[x]);
 			etiqueta.setHorizontalAlignment(JLabel.RIGHT);
 			this.campos.add(etiqueta);
-			if(noEsNuevo) {
+			if (noEsNuevo) {
 				this.datos.add(new JTextField(datos[x]));
-			}
-			else {
-				if(x == 0) {
+			} else {
+				if (x == 0) {
 					this.datos.add(new JTextField("0"));
 				} else {
 					this.datos.add(new JTextField());
@@ -111,9 +132,13 @@ public class Registro extends JFrame{
 			}
 			panelCampos.add(this.campos.get(x));
 			panelCampos.add(this.datos.get(x));
+
 		}
+		
 		return contenedor;
+
 	}
+
 	protected void cerrarVentana() {
 		setVisible(false);
 		dispose();
