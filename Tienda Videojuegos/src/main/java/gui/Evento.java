@@ -189,6 +189,7 @@ public class Evento {
 								borrado(registrosFK);
 								try {
 									Main.clienteDao.borrar((Cliente)Main.ventanaPrincipal.tabla);
+									Main.ventanaPrincipal.tabla = null;
 									Main.ventanaPrincipal.generarTablas();
 								} catch (NumberFormatException | IOException e1) {
 									e1.printStackTrace();
@@ -204,6 +205,7 @@ public class Evento {
 								borrado(registrosFK);
 								try {
 									Main.videojuegoDao.borrar((Videojuego)Main.ventanaPrincipal.tabla);
+									Main.ventanaPrincipal.tabla = null;
 									Main.ventanaPrincipal.generarTablas();
 								} catch (NumberFormatException | IOException e1) {
 									e1.printStackTrace();
@@ -221,6 +223,7 @@ public class Evento {
 							if(eleccion == 0) {
 								try {
 									Main.ventaDao.borrar((Venta)Main.ventanaPrincipal.tabla);
+									Main.ventanaPrincipal.tabla = null;
 									Main.ventanaPrincipal.generarTablas();
 								} catch (NumberFormatException | IOException e1) {
 									e1.printStackTrace();
@@ -246,84 +249,101 @@ public class Evento {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource().equals(registro.btnConfirmar)) {
 					if (registro.nombreClase.equals("Cliente")) {
-						if (registro.datos.get(1).getText().length() <= 45) {
-							if (registro.datos.get(2).getText().length() <= 45) {
-								if (Pattern.matches(Evento.FECHA, registro.datos.get(3).getText())) {
-									if (Pattern.matches(Evento.DNI, registro.datos.get(4).getText())) {
-										if (Pattern.matches(Evento.FLOAT, registro.datos.get(5).getText())) {
-											if (registro.btnConfirmar.getText().equals("Guardar")) {
-												Main.clienteDao.guardar(new Cliente(0,
-														registro.datos.get(1).getText(),
-														registro.datos.get(2).getText(),
-														registro.datos.get(3).getText(),
-														registro.datos.get(4).getText(),
-														Float.parseFloat(registro.datos.get(5).getText())));
-												Main.ventanaPrincipal.generarTablas();
-												registro.cerrarVentana();
+						Cliente nombreDuplicado = Main.clienteDao.buscarPorNombre(registro.datos.get(1).getText());
+						if(nombreDuplicado == null) {
+							if (registro.datos.get(1).getText().length() <= 45 && registro.datos.get(1).getText().trim().length() > 0) {
+								if (registro.datos.get(2).getText().length() <= 45) {
+									if (Pattern.matches(Evento.FECHA, registro.datos.get(3).getText())) {
+										int[] fecha = {Integer.parseInt(registro.datos.get(3).getText().substring(0, 4)),
+												Integer.parseInt(registro.datos.get(3).getText().substring(5, 7)),
+												Integer.parseInt(registro.datos.get(3).getText().substring(8, 10))};
+										if(validarFecha(fecha[0], fecha[1], fecha[2])) {
+											if (Pattern.matches(Evento.DNI, registro.datos.get(4).getText())) {
+												if (Pattern.matches(Evento.FLOAT, registro.datos.get(5).getText())) {
+													if (registro.btnConfirmar.getText().equals("Guardar")) {
+														Main.clienteDao.guardar(new Cliente(0,
+																registro.datos.get(1).getText(),
+																registro.datos.get(2).getText(),
+																registro.datos.get(3).getText(),
+																registro.datos.get(4).getText(),
+																Float.parseFloat(registro.datos.get(5).getText())));
+														Main.ventanaPrincipal.generarTablas();
+														registro.cerrarVentana();
+													} else {
+														Main.clienteDao.modificar(new Cliente(Integer.parseInt(registro.datos.get(0).getText()),
+																registro.datos.get(1).getText(),
+																registro.datos.get(2).getText(),
+																registro.datos.get(3).getText(),
+																registro.datos.get(4).getText(),
+																Float.parseFloat(registro.datos.get(5).getText())));
+														Main.ventanaPrincipal.generarTablas();
+														registro.cerrarVentana();
+													}
+												} else {
+													dialogoError("El saldo no es correcto. Por favor introduzcalo como número decimal como por ejemplo \"0.0\"");
+												}
 											} else {
-												Main.clienteDao.modificar(new Cliente(Integer.parseInt(registro.datos.get(0).getText()),
-														registro.datos.get(1).getText(),
-														registro.datos.get(2).getText(),
-														registro.datos.get(3).getText(),
-														registro.datos.get(4).getText(),
-														Float.parseFloat(registro.datos.get(5).getText())));
-												Main.ventanaPrincipal.generarTablas();
-												registro.cerrarVentana();
+												dialogoError("El DNI es incorrecto. Introduzca los 8 números y su letra.");
 											}
 										} else {
-											dialogoError("El saldo no es correcto. Por favor introduzcalo como número decimal con \".\"");
+											dialogoError("La fecha no es correcta. Introduzca una fecha con el formato aaaa-mm-dd y sus valores correctamente.");
 										}
 									} else {
-										dialogoError("El DNI es incorrecto. Introduzca los 8 números y su letra.");
+										dialogoError("La fecha no es correcta. Introduzca una fecha con el formato aaaa-mm-dd.");
 									}
 								} else {
-									dialogoError("La fecha no es correcta. Introduzca una fecha con el formato aaaa-mm-dd.");
+									dialogoError("El apellido no puede tener más de 45 carácteres.");
 								}
 							} else {
-								dialogoError("El apellido no puede tener más de 45 carácteres.");
+								dialogoError("El nombre no puede tener más de 45 carácteres y tampoco puede estar en blanco.");
 							}
 						} else {
-							dialogoError("El nombre no puede tener más de 45 carácteres.");
+							dialogoError("El nombre ya está registrado. Utilice otro nombre.");
 						}
 					} else if (registro.nombreClase.equals("Videojuego")) {
-						if (registro.datos.get(1).getText().length() <= 80) {
-							if (registro.datos.get(2).getText().length() <= 20) {
-								if (registro.datos.get(3).getText().length() <= 45) {
-									if (registro.datos.get(4).getText().length() <= 45) {
-										if (Pattern.matches(Evento.INT, registro.datos.get(5).getText())) {
-											if (registro.btnConfirmar.getText().equals("Guardar")) {
-												Main.videojuegoDao.guardar(new Videojuego(0,
-														registro.datos.get(1).getText(),
-														registro.datos.get(2).getText(),
-														registro.datos.get(3).getText(),
-														registro.datos.get(4).getText(),
-														Integer.parseInt(registro.datos.get(5).getText())));
-												Main.ventanaPrincipal.generarTablas();
-												registro.cerrarVentana();
+						Videojuego nombreDuplicado = Main.videojuegoDao.buscarPorTitulo(registro.datos.get(1).getText());
+						if(nombreDuplicado == null) {
+							if (registro.datos.get(1).getText().length() <= 80 && registro.datos.get(1).getText().trim().length() > 0) {
+								if (registro.datos.get(2).getText().length() <= 20) {
+									if (registro.datos.get(3).getText().length() <= 45) {
+										if (registro.datos.get(4).getText().length() <= 45) {
+											if (Pattern.matches(Evento.INT, registro.datos.get(5).getText())) {
+												if (registro.btnConfirmar.getText().equals("Guardar")) {
+													Main.videojuegoDao.guardar(new Videojuego(0,
+															registro.datos.get(1).getText(),
+															registro.datos.get(2).getText(),
+															registro.datos.get(3).getText(),
+															registro.datos.get(4).getText(),
+															Integer.parseInt(registro.datos.get(5).getText())));
+													Main.ventanaPrincipal.generarTablas();
+													registro.cerrarVentana();
+												} else {
+													Main.videojuegoDao.modificar(new Videojuego(Integer.parseInt(registro.datos.get(0).getText()),
+															registro.datos.get(1).getText(),
+															registro.datos.get(2).getText(),
+															registro.datos.get(3).getText(),
+															registro.datos.get(4).getText(),
+															Integer.parseInt(registro.datos.get(5).getText())));
+													Main.ventanaPrincipal.generarTablas();
+													registro.cerrarVentana();
+												}
 											} else {
-												Main.videojuegoDao.modificar(new Videojuego(Integer.parseInt(registro.datos.get(0).getText()),
-														registro.datos.get(1).getText(),
-														registro.datos.get(2).getText(),
-														registro.datos.get(3).getText(),
-														registro.datos.get(4).getText(),
-														Integer.parseInt(registro.datos.get(5).getText())));
-												Main.ventanaPrincipal.generarTablas();
-												registro.cerrarVentana();
+												dialogoError("La cantidad de stock no es correcto. Por favor introduzcalo con un número");
 											}
 										} else {
-											dialogoError("La cantidad de stock no es correcto. Por favor introduzcalo con un número");
+											dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
 										}
 									} else {
-										dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
+										dialogoError("El género no puede tener más de 45 carácteres.");
 									}
 								} else {
-									dialogoError("El género no puede tener más de 45 carácteres.");
+									dialogoError("La versión no puede tener más de 20 carácteres.");
 								}
 							} else {
-								dialogoError("La versión no puede tener más de 20 carácteres.");
+								dialogoError("El titulo no puede tener más de 80 carácteres y tampoco puede estar en blanco.");
 							}
 						} else {
-							dialogoError("El titulo no puede tener más de 80 carácteres.");
+							dialogoError("El título ya está registrado. Utilice otro título.");
 						}
 					} else {
 						if (registro.datos.get(1).getText().length() <= 45) {
@@ -359,7 +379,7 @@ public class Evento {
 											"¡Imposible relacionar!", JOptionPane.WARNING_MESSAGE);
 								}
 							} else {
-								dialogoError("Valor incorrecto en suscripción. Introduzca verdadero o falso.");
+								dialogoError("Valor incorrecto en suscripción. Introduzca Verdadero o Falso.");
 							}
 						} else {
 							dialogoError("El tipo de licencia no puede tener más de 45 carácteres.");
@@ -384,5 +404,18 @@ public class Evento {
 	}
 	private static void dialogoError(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "¡Modificación no aceptada!", JOptionPane.ERROR_MESSAGE);
+	}
+	private static boolean validarFecha(int anio, int mes, int dia) {
+		int[] diasMes= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		if ( anio < 1900 ) {
+	        throw new IllegalArgumentException( 
+	                "Solo se comprueban fechas del año 1900 o posterior");
+	    }
+	    if (  mes <1 || mes > 12 )
+	        return false;
+	    // Para febrero y bisiesto el limite es 29
+	    if ( mes==2 && anio%4==0 )
+	        return dia>=1 && dia<=29;
+	    return dia>=0 && dia <= diasMes[mes-1];
 	}
 }
